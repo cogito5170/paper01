@@ -120,3 +120,9 @@
 | 파일 | 제목 | 출처 |
 |---|---|---|
 | modern/Zhou2022_symmetric_Gaussian_DSC.pdf | On Distributed Lossy Coding of Symmetrically Correlated Gaussian Sources (Zhou, Salehkalaibar, Qian, Chen, Shi, Ge, Tong; IEEE Trans. Commun. 70(12), 2022) | https://arxiv.org/abs/2201.07784 |
+
+## 추가 4 (2026-11-19, 가장 가까운 선행연구)
+
+| 파일 | 제목 | 출처 |
+|---|---|---|
+| modern/Zhang2023_CEO_model_aggregation.pdf | Fundamental Limits of Communication Efficiency for Model Aggregation in Distributed Learning: A Rate-Distortion Approach (N. Zhang, M. Tao, J. Wang, F. Xu; IEEE Trans. Commun. 71(1):173–186, 2023, DOI [10.1109/TCOMM.2022.3224977](https://doi.org/10.1109/TCOMM.2022.3224977); 학회판 ISIT 2021). 받은 파일은 arXiv v1(30쪽)이며 출판본과 세부 차이가 있을 수 있음 | https://arxiv.org/abs/2206.13984 |
