@@ -1,0 +1,136 @@
+\input{preamble.tex}
+\title{\sffamily 작업장 W2\\[2pt]\large 군 합 CEO의 스칼라 단발 달성}
+\author{}
+\date{2026-11-22}
+\begin{document}
+\maketitle
+\vspace{-2.5em}
+\begin{center}\small
+모델: \texttt{SPEC.md} P절 (블록 길이 $n=1$). 교재: \texttt{derivations/textbook/Lattice\_dither\_WynerZiv.md} 3절(디더), \texttt{derivations/classic/16\_Schuchman1964.md}
+\end{center}
+
+\textbf{사용법.} 표의 오른쪽 칸을 채운다. 힌트는 부록 A, 답은 부록 B. 이 작업장은 이 연구의 \textbf{첫 정리}를 처음부터 끝까지 증명한다. 전형성(typicality)은 필요 없고, 확률 부등식(체비쇼프·가우시안 꼬리·회프딩)만 쓴다.
+
+\section*{0. 모델과 방식}
+
+\textbf{모델.} $X\sim\mathcal N(0,\sX)$. 작업자 $k=1,\dots,K$는 $Y_k=X+N_k$, $N_k\sim\mathcal N(0,\sN)$ (서로·$X$와 독립)를 본다. $\gamma:=\sX/\sN$. 공유 난수 $W=(U_1,\dots,U_K)$, $U_k\stackrel{\text{iid}}{\sim}\Unif[-\Delta/2,\Delta/2)$, $(X,N)$과 독립. 군 $G=\mathbb Z_M$. 스위치는 $Z=Q_1\oplus\cdots\oplus Q_K$만 낸다.
+
+\textbf{방식 $\mathcal S(\Delta,M)$.} $\round(v)$는 가장 가까운 정수.
+\begin{itemize}[leftmargin=1.5em]
+\item 작업자 $k$: $q_k=\round\big((Y_k+U_k)/\Delta\big)\in\mathbb Z$, 전송 $Q_k=q_k \bmod M$.
+\item 스위치: $Z=\sum_kQ_k \bmod M = S\bmod M$, \ $S:=\sum_k q_k$.
+\item 복호기: $\hat s=c_M(Z)$ (중심 대표원, $I_M:=\{-\lfloor M/2\rfloor,\dots,\lceil M/2\rceil-1\}$ 안의 원소), $\hat T=\Delta\hat s-\sum_kU_k$, $\hat X=\hat T/K$.
+\end{itemize}
+\textbf{기호.} $E_k:=\Delta q_k-(Y_k+U_k)\in[-\Delta/2,\Delta/2)$ (양자화 오차), \ $A_k:=\Delta q_k-Y_k=U_k+E_k$.
+
+\begin{thmbox}
+\textbf{정리 W2 (스칼라 단발 달성).} $a>0$을 고르고 $s^2:=\max\{K^2\sX+K\sN,\ K\Delta^2\}$, $M:=\lceil 2+2as/\Delta\rceil$로 두자. 그러면 방식 $\mathcal S(\Delta,M)$은 $R_{\mathrm{up}}=R_{\mathrm{down}}=\log_2M$에서
+\[
+D=\E(X-\hat X)^2\ \le\ \frac{\sN+\Delta^2/12}{K}\;+\;2\sqrt3\,\sX\sqrt p\;+\;2L^2p,
+\qquad p:=4e^{-a^2/8},\ \ L:=\frac{\Delta(M+K)}{2K}.
+\]
+\end{thmbox}
+
+\section*{1부. 디더의 두 성질}
+
+\steptable{
+1.1 & (암호 보조정리, 1차원) 고정된 $y$에 대해 $E=\Delta\round((y+U)/\Delta)-(y+U)\sim\Unif[-\Delta/2,\Delta/2)$ & \\
+1.2 & 따라서 $E_k$는 $(X,N_1,\dots,N_K)$와 독립이고, $E_1,\dots,E_K$는 서로 독립인 균일 변수다 & \\
+1.3 & (빼지 않는 디더의 불편성) $\E[A_k\mid Y_k]=0$ & \\
+1.4 & $\Var(A_k\mid Y_k)\le\Delta^2/4$ & \\
+1.5 & $Y$ 전체가 주어지면 $A_1,\dots,A_K$는 조건부 독립이고 각자 길이 $\Delta$인 구간 안에 있다 & \\
+}
+
+\textbf{연습 1.6} 모든 작업자가 \emph{같은} 디더 $U$를 쓰면 1.2의 어느 부분이 깨지는가? 그때 $\Var(\sum_kE_k)$는 최악에 얼마까지 커질 수 있고, 왜곡에 무슨 일이 생기는가?
+\vspace{4em}
+
+\section*{2부. 감김이 없을 때의 정확한 식}
+
+\steptable{
+2.1 & 정수 $S\in I_M$이면 $c_M(S\bmod M)=S$ & \\
+2.2 & $S\in I_M$이면 $\hat T=\sum_kY_k+\sum_kE_k=KX+\sum_kN_k+\sum_kE_k$ & \\
+2.3 & 따라서 $\hat X-X=\frac1K\big(\sum_kN_k+\sum_kE_k\big)$ & \\
+2.4 & $\E\big(\sum_kN_k+\sum_kE_k\big)^2=K(\sN+\Delta^2/12)$ & \\
+}
+
+\section*{3부. 감김 확률}
+
+\steptable{
+3.1 & $|S|\le M/2-1$이면 $S\in I_M$ & \\
+3.2 & $\Delta S=(KX+\textstyle\sum_kN_k)+\sum_kA_k$ & \\
+3.3 & $M\ge2+2as/\Delta$이면 $\{S\notin I_M\}\subseteq\{|\Delta S|>as\}$ & \\
+3.4 & $\Pr\big(|KX+\sum N_k|>as/2\big)\le2e^{-a^2/8}$ & (가우시안 꼬리)\\
+3.5 & $\Pr\big(|\sum_kA_k|>as/2\big)\le2e^{-a^2/2}\le2e^{-a^2/8}$ & (회프딩)\\
+3.6 & $\Pr(S\notin I_M)\le p=4e^{-a^2/8}$ & \\
+}
+
+\section*{4부. 왜곡의 상한}
+
+\steptable{
+4.1 & $|\hat X|\le L=\Delta(M+K)/(2K)$ 항상 & \\
+4.2 & $\E[(X-\hat X)^2\mathbf 1\{S\in I_M\}]\le(\sN+\Delta^2/12)/K$ & \\
+4.3 & $(X-\hat X)^2\le2X^2+2L^2$ & \\
+4.4 & $\E[X^2\mathbf 1\{S\notin I_M\}]\le\sqrt{\E X^4}\sqrt p=\sqrt3\,\sX\sqrt p$ & \\
+4.5 & 모으면 정리 W2 & (대수)\\
+}
+
+\section*{5부. 척도: 작업자가 많아지면}
+
+\textbf{따름정리 W2$'$.} 목표 왜곡을 $D\approx\theta\,\sN/K$ ($\theta>1$)로 두고 $\Delta^2=12(\theta-1)\sN$로 고르자. $a_K:=\sqrt{32\ln K+8\ln4}$로 두면 $p=K^{-4}$이고, $K\to\infty$에서
+\[
+D\le\frac{\theta\sN}{K}+O(K^{-2}),\qquad
+R_{\mathrm{up}}=R_{\mathrm{down}}=\log_2K+\tfrac12\log_2\frac{\gamma}{12(\theta-1)}+O(\log\log K).
+\]
+
+\textbf{연습 5.1} 위 식을 정리 W2에서 유도하라. ($Kγ$가 충분히 크면 $s\approx K\sigma_X$.) \vspace{3em}
+
+\textbf{연습 5.2 (비교 기준).} 제약 없는 불편 CEO(Zhang 2023 따름정리 2)에서 $D=\theta\sN/K$일 때 작업자당 율 $r$과 하행 $\frac12\log_2(1+\sX/D)$를 구하라. $\theta=2$, $\sX=\sN=1$, $K=16$에서 방식 $\mathcal S$와 비교하라.
+\vspace{4em}
+
+\begin{bridge}
+\textbf{이 정리가 말하는 것.} 단순한 군 합 방식은 상행·하행 모두 $\log_2K+\frac12\log_2\gamma+O(1)$비트를 쓴다. 제약 없는 CEO는 작업자당 상행 $O(1)$비트, 하행 $\frac12\log_2(K\gamma/\theta)$비트다. 하행 간극은 $\tfrac12\log_2K+O(1)$, 상행 간극은 $\log_2K+O(1)$이다. \textbf{이 간극이 방식의 탓인지, 군 합 제약 자체의 탓인지}를 가리는 것이 W4·W5(역)이다.
+\end{bridge}
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{rcccc}
+\toprule
+$K$ & 방식 $\mathcal S$, $a=12$: $\log_2M$ & 보장 $D\le$ & 제약 없는 하행 & Zhang 작업자당 상행\\ \midrule
+4 & 5.67 & 0.501 & 0.79 & 0.70\\
+16 & 6.87 & 0.126 & 1.58 & 0.60\\
+64 & 8.81 & 0.032 & 2.52 & 0.54\\
+256 & 10.80 & 0.0087 & 3.51 & 0.51\\
+\bottomrule
+\end{tabular}\\[2pt]
+$\sX=\sN=1$, $\theta=2$ ($\Delta=\sqrt{12}$). 목표 $D=2/K$. 체르노프형 꼬리 상수가 느슨해 $\log_2M$에 약 1.5비트의 여유가 들어 있다. 단위는 비트.
+\end{center}
+
+\newpage
+\section*{부록 A. 힌트}
+\begin{itemize}[leftmargin=2.2em]
+\item[1.1] $y$를 $\Delta$로 나눈 나머지만 중요하다. $y+U$가 길이 $\Delta$인 구간을 균일하게 훑을 때 $E=\Delta\round(\cdot)-(\cdot)$는 $[-\Delta/2,\Delta/2)$를 정확히 한 번 훑는다(톱니 함수). 분포함수를 직접 계산하라.
+\item[1.2] $E_k$는 $(Y_k,U_k)$의 함수이고, $(X,N)$이 주어졌을 때 $E_k$의 조건부 분포는 1.1에 의해 $Y_k$의 값과 무관하게 균일하다. 서로 다른 $k$의 $E_k$는 서로 다른 $U_k$로 만들어진다.
+\item[1.3] $y\in[\Delta j-\Delta/2,\Delta j+\Delta/2)$ 같은 칸 기준이 아니라, $\Delta j\le y<\Delta(j+1)$로 두면 $\Delta\round((y+U)/\Delta)\in\{\Delta j,\Delta(j+1)\}$이고 위로 갈 확률은 $(y-\Delta j)/\Delta$.
+\item[1.4] 길이 $\Delta$인 두 점 위의 분포의 분산은 최대 $\Delta^2/4$.
+\item[1.5] 1.3–1.4의 구조를 $Y$ 전체를 조건으로 다시 본다.
+\item[2.1] $c_M$의 정의. $I_M$은 $\mathbb Z_M$의 완전 대표계다.
+\item[2.2] $\Delta S=\sum(Y_k+U_k+E_k)$.
+\item[2.4] 1.2로 교차항이 0.
+\item[3.1] $M/2-1\le\lceil M/2\rceil-1\le\lfloor M/2\rfloor$.
+\item[3.4] $KX+\sum N_k\sim\mathcal N(0,K^2\sX+K\sN)$이고 분산 $\le s^2$. $\Pr(|\mathcal N(0,v)|>t)\le2e^{-t^2/(2v)}$.
+\item[3.5] $Y$를 조건으로 1.5와 회프딩 부등식 $\Pr(|\sum A_k|>t\mid Y)\le2\exp(-2t^2/(K\Delta^2))$. $s^2\ge K\Delta^2$.
+\item[4.1] $|\hat s|\le M/2$, $|U_k|\le\Delta/2$.
+\item[4.2] 2.3–2.4. 지시함수를 빼면 기댓값이 커진다.
+\item[4.4] 코시–슈바르츠, 가우시안 $\E X^4=3\sigma_X^4$.
+\end{itemize}
+
+\section*{부록 B. 답}
+\begin{itemize}[leftmargin=2.2em]
+\item[1.6] $E_k$들이 공통 $U$로 묶여 독립이 깨진다. $Y_k$들이 거의 같으면 $E_k$도 거의 같아 $\Var(\sum E_k)\approx K^2\Delta^2/12$. 그러면 $\hat X$의 양자화 오차가 $\Delta^2/12$에서 줄지 않는다(작업자 평균의 이득이 사라짐). 작업자별 독립 디더가 $\Delta^2/(12K)$를 만든다.
+\item[5.1] $\log_2M\approx\log_2(2as/\Delta)$, $s\approx K\sigma_X$, $\Delta=\sqrt{12(\theta-1)}\sigma_N$ $\Rightarrow$ $\log_2K+\log_2(\sigma_X/\Delta)+\log_2(2a_K)$이고 $\log_2(2a_K)=O(\log\log K)$. 왜곡: $(\sN+(\theta-1)\sN)/K=\theta\sN/K$, 나머지 항은 $p=K^{-4}$로 $O(K^{-2})$.
+\item[5.2] $\frac{1-2^{-2r}}{\sN}K=\frac1D$ $\Rightarrow$ $2^{-2r}=1-\frac{\sN}{KD}=1-\frac1\theta$. $\theta=2$면 $r=\frac12$비트. 하행 $\frac12\log_2(1+K\gamma/\theta)=\frac12\log_2 9\approx1.58$ ($K=16$). 방식 $\mathcal S$는 $6.87$비트(상·하행). 가우시안 근사 꼬리를 쓰면 약 $5.4$비트.
+\end{itemize}
+
+\vspace{1em}
+\small\textcolor{ink!60}{수치는 Python으로 계산함 (scratchpad/w25nums.py). 다음: W3 가우시안 CEO 역정리.}
+\end{document}

@@ -125,4 +125,57 @@
 
 | 파일 | 제목 | 출처 |
 |---|---|---|
-| modern/Zhang2023_CEO_model_aggregation.pdf | Fundamental Limits of Communication Efficiency for Model Aggregation in Distributed Learning: A Rate-Distortion Approach (N. Zhang, M. Tao, J. Wang, F. Xu; IEEE Trans. Commun. 71(1):173–186, 2023, DOI [10.1109/TCOMM.2022.3224977](https://doi.org/10.1109/TCOMM.2022.3224977); 학회판 ISIT 2021). 받은 파일은 arXiv v1(30쪽)이며 출판본과 세부 차이가 있을 수 있음 | https://arxiv.org/abs/2206.13984 |
+| modern/Zhang2023_CEO_model_aggregation.pdf | Fundamental Limits of Communication Efficiency for Model Aggregation in Distributed Learning: A Rate-Distortion Approach (N. Zhang, M. Tao, J. Wang, F. Xu; IEEE Trans. Commun. 71(1):173–186, 2023, DOI [10.1109/TCOMM.2022.3224977](https://doi.org/10.1109/TCOMM.2022.3224977); 학회판 ISIT 2021). 받은 파일은 arXiv v1(30쪽, 2026-11-21 받음)이며 출판본과 세부 차이가 있을 수 있음 | https://arxiv.org/abs/2206.13984 |
+
+## 추가 5 (2026-11-21, 군 합 CEO 레퍼런스, interview Q26–Q28)
+
+공개본만 받았다 (arXiv, 저자·대학 페이지). 쪽수와 첫 쪽 제목·저자를 대조해 확인함.
+
+| 파일 | 제목 | 판 | 출처 |
+|---|---|---|---|
+| modern/Chen2004_CEOSumRate.pdf | An Upper Bound on the Sum-Rate Distortion Function and Its Corresponding Rate Allocation Schemes for the CEO Problem (Chen, Zhang, Berger, Wicker; IEEE JSAC 22(6), 2004) | 학술지판, 11쪽 | https://www.ece.mcmaster.ca/~junchen/01321210.pdf |
+| modern/Wagner2008_TwoEncoder.pdf | Rate Region of the Quadratic Gaussian Two-Encoder Source-Coding Problem (Wagner, Tavildar, Viswanath; IEEE TIT 2008) | arXiv v3, 55쪽 | https://arxiv.org/abs/cs/0510095 |
+| modern/Krithivasan2011_AbelianGroup.pdf | Distributed Source Coding using Abelian Group Codes (Krithivasan, Pradhan; IEEE TIT 2011) | arXiv v1, 44쪽 | https://arxiv.org/abs/0808.2659 |
+| modern/Ordentlich2013_SIF.pdf | Successive Integer-Forcing and its Sum-Rate Optimality (Ordentlich, Erez, Nazer) | arXiv v1, 12쪽 | https://arxiv.org/abs/1307.2105 |
+| modern/Zamir2002_NestedBinning.pdf | Nested Linear/Lattice Codes for Structured Multiterminal Binning (Zamir, Shamai, Erez; IEEE TIT 48(6), 2002) | 학술지판, 27쪽 | http://www.eng.tau.ac.il/~zamir/papers/nested_zse.pdf |
+| modern/Erez2004_LatticeAWGN.pdf | Achieving ½log(1+SNR) on the AWGN Channel With Lattice Encoding and Decoding (Erez, Zamir; IEEE TIT 50(10), 2004) | 학술지 형식, 22쪽 | http://web.mit.edu/6.454/www/www_fall_2004/latticedecoding/erez_zamir_lat_dec.pdf |
+| modern/Mergen2006_TypeBased.pdf | Type Based Estimation Over Multiaccess Channels (Mergen, Tong; IEEE TSP 54(2), 2006) | 학술지판, 14쪽 | http://acsp.ece.cornell.edu/papers/MergenTong06SP.pdf |
+| modern/Ribeiro2006_BandwidthConstrainedI.pdf | Bandwidth-Constrained Distributed Estimation for Wireless Sensor Networks—Part I: Gaussian Case (Ribeiro, Giannakis; IEEE TSP 54(3), 2006) | 학술지판, 13쪽 | https://www.seas.upenn.edu/~aribeiro/preprints/2006_ribeiro_giannakis_a.pdf |
+| modern/Xie2023_JointCodingModDigitalOAC.pdf | Joint Design of Coding and Modulation for Digital Over-the-Air Computation (Xie, Hua, Hong, Wei) | arXiv v1, 6쪽 | https://arxiv.org/abs/2311.06829 |
+| modern/Jeon2013_OrthogonalGaussianNetworks.pdf | Computation Over Gaussian Networks With Orthogonal Components (Jeon, Wang, Gastpar) | arXiv v1, 30쪽 | https://arxiv.org/abs/1310.7112 |
+
+신규성 1차 점검 (첫 쪽 초록 기준, 정독 전): SumComp(기존 modern/SumComp2023.pdf와 동일 파일), Xie 2023, Jeon 2013은 모두 모듈로 합의 *계산* 방식이며, 고정 폭 모듈로 합에서 공통 소스를 *추정*하는 설정은 아니다. 후속 확인 후보: arXiv 0709.4035, arXiv 2604.28080 (미확보).
+
+## 추가 6 (2026-11-22, 사용자 제공 — 가우시안 CEO 핵심, IEEE Xplore)
+
+쪽수와 첫 쪽 제목·저자를 대조해 확인함.
+
+| 파일 | 제목 | 쪽 | DOI |
+|---|---|---|---|
+| classic/S3_Oohama1998.pdf | The Rate-Distortion Function for the Quadratic Gaussian CEO Problem (Oohama, IEEE TIT 44(3), 1998) | 14 | [10.1109/18.669162](https://doi.org/10.1109/18.669162) |
+| classic/S4_PrabhakaranTseRamchandran2004.pdf | Rate Region of the Quadratic Gaussian CEO Problem (Prabhakaran, Tse, Ramchandran, ISIT 2004) | 1 (요약) | [10.1109/ISIT.2004.1365154](https://doi.org/10.1109/ISIT.2004.1365154) |
+| classic/S5_ViswanathanBerger1997.pdf | The Quadratic Gaussian CEO Problem (Viswanathan, Berger, IEEE TIT 43(5), 1997) | 11 | [10.1109/18.623151](https://doi.org/10.1109/18.623151) |
+| classic/S6_Oohama2005.pdf | Rate-Distortion Theory for Gaussian Multiterminal Source Coding Systems With Several Side Informations at the Decoder (Oohama, IEEE TIT 51(7), 2005) | 17 | [10.1109/TIT.2005.850110](https://doi.org/10.1109/TIT.2005.850110) |
+| classic/S7_AhlswedeHan1983.pdf | On Source Coding with Side Information via a Multiple-Access Channel and Related Problems in Multi-User Information Theory (Ahlswede, Han, IEEE TIT 29(3), 1983) | 17 | [10.1109/TIT.1983.1056669](https://doi.org/10.1109/TIT.1983.1056669) |
+
+## 추가 7 (2026-11-22, 교재·해설 자료)
+
+쪽수와 첫 쪽 제목·저자를 대조해 확인함.
+
+| 파일 | 제목 | 판 | 출처 |
+|---|---|---|---|
+| modern/ElGamalKim2010_NIT_lecture_notes_v4.pdf | Lecture Notes on Network Information Theory (El Gamal, Kim). Lecture 12 부가 정보가 있는 소스 부호화 = 293–311쪽, Lecture 13 분산 손실 소스 부호화 = 312–338쪽 (책 *Network Information Theory* 11·12장에 해당) | arXiv v4, 640쪽. 최신 v5는 책 안내 1쪽뿐이라 v4를 받음 | https://arxiv.org/abs/1001.3404v4 |
+| modern/Bottou2018_LargeScaleML.pdf | Optimization Methods for Large-Scale Machine Learning (Bottou, Curtis, Nocedal; SIAM Review 2018) | arXiv v3, 95쪽 | https://arxiv.org/abs/1606.04838 |
+| modern/Bubeck2015_ConvexOptimization.pdf | Convex Optimization: Algorithms and Complexity (Bubeck; FnT ML 8(3–4), 2015). 6장 정리 6.3 = Zhang 2023의 정리 1 | arXiv v2, 130쪽 | https://arxiv.org/abs/1405.4980 |
+| modern/AjalloeianStich2020_BiasedSGD.pdf | On the Convergence of SGD with Biased Gradients (Ajalloeian, Stich) | arXiv v2, 16쪽 | https://arxiv.org/abs/2008.00051 |
+
+Zamir, *Lattice Coding for Signals and Networks* (Cambridge 2014)는 공개본이 없어 받지 못했다.
+
+## modern/ — 정보 병목(IB) 문헌 (2026-11-24 추가, arXiv 원문, 첫 쪽 제목 대조로 확인함)
+
+| 파일 | 제목 | 출처 | 비고 |
+|---|---|---|---|
+| TishbyZaslavsky2015_DL_IB.pdf | Deep Learning and the Information Bottleneck Principle | https://arxiv.org/abs/1503.02406 (v1) | IEEE ITW 2015, 5쪽. 정보 평면과 이론 틀 제시. fitting/compression 2단계 실험은 이 논문이 아니라 아래 2017 논문 |
+| ShwartzZivTishby2017_BlackBox.pdf | Opening the Black Box of Deep Neural Networks via Information | https://arxiv.org/abs/1703.00810 (v3) | fitting → compression 2단계를 실험으로 보인 논문. 반론: Saxe 외, ICLR 2018 |
+| Alemi2017_VIB.pdf | Deep Variational Information Bottleneck | https://arxiv.org/abs/1612.00410 (v7) | ICLR 2017 게재판과 같은 본문 ("Published as a conference paper at ICLR 2017") |
+| Shao2022_TaskOriented_IB.pdf | Learning Task-Oriented Communication for Edge Inference: An Information Bottleneck Approach | https://arxiv.org/abs/2102.04170 (v3, 2023-01-18) | IEEE JSAC 40(1), pp. 197–211, 2022, DOI 10.1109/JSAC.2021.3126087. 저자 최종판. IEEE 조판본은 미확보 |

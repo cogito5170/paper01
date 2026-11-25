@@ -1,0 +1,31 @@
+% 번역본 공통 서식. tectonic으로 컴파일.
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont={Apple SD Gothic Neo Bold},ItalicFont={AppleMyungjo},ItalicFeatures={FakeSlant=0.18}]{AppleMyungjo}
+\setCJKsansfont{Apple SD Gothic Neo}
+\setCJKmonofont{Apple SD Gothic Neo}
+\xeCJKsetup{CJKspace=true,CJKecglue={},xCJKecglue=false}
+\usepackage{amsmath,amssymb,mathtools,bm}
+\usepackage[margin=24mm]{geometry}
+\usepackage{booktabs,tabularx,array,multirow}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\linespread{1.3}
+\setlength{\parskip}{0.35em}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\dd}{\mathsf{d}}   % 왜곡 척도 d (원문 산세리프)
+\newcommand{\ff}{\mathsf{f}}
+\renewcommand{\gg}{\mathsf{g}}  % 주의: ≫ 는 \ggg 대신 \gg 사용 불가
+\newcommand{\ttl}{\jmath}      % d-기울인 정보 ȷ
+\newcommand{\iinf}{\imath}     % 정보 확률변수 ı
+\newcommand{\onote}[1]{\footnote{[옮긴이] #1}}
+\renewcommand{\figurename}{그림}
+\renewcommand{\tablename}{표}
+\renewcommand{\abstractname}{초록}

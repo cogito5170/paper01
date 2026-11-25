@@ -1,0 +1,43 @@
+% 작업장 공통 서식 (W2 이후). tectonic으로 컴파일.
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setCJKmainfont{AppleMyungjo}
+\setCJKsansfont{Apple SD Gothic Neo}
+\setCJKmonofont{Apple SD Gothic Neo}
+\xeCJKsetup{CJKspace=true}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=23mm]{geometry}
+\usepackage{booktabs,tabularx,array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+\linespread{1.25}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+
+\definecolor{ink}{HTML}{1B2433}
+\definecolor{acc}{HTML}{2C55C9}
+\definecolor{hot}{HTML}{B8650A}
+\newtcolorbox{thmbox}{colback=acc!4,colframe=acc!60,boxrule=0.5pt,arc=1pt,left=6pt,right=6pt,breakable}
+\newtcolorbox{bridge}{colback=hot!5,colframe=hot!70,boxrule=0.5pt,arc=1pt,left=6pt,right=6pt,breakable}
+\newtcolorbox{openprob}{colback=ink!3,colframe=ink!45,boxrule=0.5pt,arc=1pt,left=6pt,right=6pt,breakable}
+
+\newcommand{\blank}{\rule[-0.3em]{0pt}{1.6em}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\steptable}[1]{\par\noindent%
+  \renewcommand{\arraystretch}{1.55}%
+  \begin{tabularx}{\linewidth}{@{}p{1.1cm}>{\raggedright\arraybackslash}p{7.6cm}Y@{}}
+  \toprule
+  단계 & 주장 & 근거 (직접 채울 것)\\ \midrule
+  #1
+  \bottomrule
+  \end{tabularx}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Unif}{\operatorname{Unif}}
+\newcommand{\round}{\operatorname{rd}}
+\newcommand{\sX}{\sigma_X^2}
+\newcommand{\sN}{\sigma_N^2}

@@ -1,21 +1,24 @@
 STATUS: CONTINUE
-META: 2026-11-19 18:15 · main@4edc56a · uncommitted 2 files
+META: 2026-11-25 03:19 · main@5a2ca0a · uncommitted 22 files
 ## Done
-- 문헌 70편(classic 17, modern 53)을 sonnet 에이전트 6개로 조사해 papers/SURVEY.md 로 합침. 맨 앞 "0. 종합"에 묶음별 역할, 관점별 정리, 신규성 판단, 미확인 목록이 있음.
-- Krithivasan–Pradhan Thm 3.1(식 19)을 원문으로 확인: 대칭이면 R ≥ ½log₂(2/D̄), 가설 A-3의 N=2 꼴. 달성만 있고 하한·N>2·군 덧셈 제약은 없음.
-- 커밋 4edc56a: 저장소가 PUBLIC이라 PDF는 .gitignore로 빼고 문서·sims·.relay만 커밋. push 안 함.
+- v3 초록 검토, 문서 2 보상식 원문 확인(선택 수↑ → 보상↑), 질문방 (9) 검토 메모 추가.
+- 번역: COMST 2026 서베이(78쪽), Enttsel–Corlay 2602.12866(15쪽, CC BY).
+- 세그먼트 SOTA 지도 + papers/segment/ 30편.
+- 질문방-2026-11-25 (2) 결론 정리(채팅), 반박 모드 토론으로 연구 주제 좁힘.
 ## Decisions
-- 공개 저장소이므로 PDF는 커밋하지 않고 DOI(papers/README.md)만 둔다 (사용자 지시).
-- ①~④ 확정과 §4.2 추가는 아직 답을 받지 못함.
+- 주제 2(연판정 V)는 분류에서 이득 수 비트 → 대규모 K 과업에서만 의미.
+- "같은 예산 E&C > 분할"은 문서 7의 주장(미검증) → 아이디어 아닌 검증 기여.
+- 독창 후보: 제한된 부호기 집합(분할·조각 선택) 아래 모델 인지 RD 한계; 제약 없으면 [11] 분할 불변성으로 층별 한계가 TMRD와 같아짐.
+- 구조안: 전단+조기 종료 헤드, T·τ는 오프라인 보정 후 송신기 저장, 불확실 입력만 특징 전송; 온라인 루프는 측정 가능한 양(ACK, 불확실 비율, FLOPs)만 제어.
+- 사용자 요청 "반박 모드"는 사용자가 그만이라 할 때까지 유지 중.
 ## Next
-1. ①~④(스칼라 단발, 단일 라운드, 상행·하행 율 분리, 기호 K) 확정 여부와 §4.2 추가 여부를 묻는다.
-2. 확정되면 SPEC·proposal을 개정하고, 관련 연구에 Krithivasan–Pradhan, Chen2022 Cor 5.4, Chen2023, Wagner 2011 비교를 넣어 커밋한다.
-3. push 여부를 묻는다. interview.md와 .relay/가 공개돼도 되는지 확인을 받는다.
-4. papers/README.md에서 #02 Wyner와 #16 Schuchman이 "기관 구독 필요"로 남아 있음. 실제 PDF가 있으니 고칠지 묻는다.
-5. 보조정리 L의 5b 증명(SURVEY 0.2-3: (ℤ_{2^b})^d에서 부분군 균등 문제), 율-K 시뮬레이션, 신규성 2차 점검.
+1. 사용자에게 반박 모드 지속 여부 확인 후 토론 이어 가기.
+2. 검색: 물리 계층(FBL·페이딩·JSCC) 고려 분할 지점 선택 선행 연구 유무.
+3. 확인: [11] 분할 불변성 증명이 H(Y|X)=0에 기대는지; [36] Table 4(INT8/INT4 정확도).
+4. 제안 대기: 결론을 질문방 파일/v4 초록에 기록, 번역 폴더 커밋, Doppler PDF(사용자 제공 대기).
 ## Files
-- papers/SURVEY.md:1-75
-- proposal.md:47-60
-- SPEC.md:59-80
-- draft.md:1-139
-- papers/README.md:1-110
+- idea/질문방-2026-11-25 (2).md:1-1888
+- idea/abstract_v3_IB_patch_selection.md:1-93
+- derivations/translation_enttsel2026/body.tex:1-300
+- derivations/translation_seon2025_tccn/part_C.tex:1-170
+- papers/SEGMENT_SOTA_2026-11-24.md:1-63

@@ -1,0 +1,128 @@
+\input{preamble.tex}
+\title{\sffamily 작업장 W3\\[2pt]\large 대칭 가우시안 CEO의 역정리 (Oohama)}
+\author{}
+\date{2026-11-22}
+\begin{document}
+\maketitle
+\vspace{-2.5em}
+\begin{center}\small
+교재: \texttt{derivations/textbook/EGK\_L13\_distributed\_lossy.md} 2.8절(EPI), 3.7절(가우시안 CEO).\\
+원문: El Gamal–Kim 강의노트 v4 Lecture 13, 슬라이드 13–33~13–38 (PDF 328–330쪽); Oohama 1998 (\texttt{papers/classic/S3\_Oohama1998.pdf})
+\end{center}
+
+\textbf{사용법.} 표의 오른쪽 칸을 채운다. 힌트는 부록 A, 답은 부록 B. 이 작업장은 \textbf{이 연구의 비교 기준선}을 손으로 유도한다. W1의 2부를 먼저 끝내고 오는 것이 좋다.
+
+\section*{0. 문제}
+$X^n$ i.i.d. $\mathcal N(0,P)$. 작업자 $k=1,\dots,K$는 $Y_k^n=X^n+N_k^n$, $N_k^n$ i.i.d. $\mathcal N(0,N)$ (서로·$X$와 독립)만 보고 $M_k=m_k(Y_k^n)\in\{1,\dots,2^{nR_k}\}$를 보낸다. 복호기는 $(M_1,\dots,M_K)$를 \textbf{모두} 보고 $\hat X^n$을 낸다. 왜곡 $\frac1n\sum_i\E(X_i-\hat X_i)^2\le D$. 합 율 $R_{\mathrm{sum}}=\sum_kR_k$.
+
+\textbf{필요한 도구: 조건부 EPI.} $A^n,B^n$이 $C$가 주어지면 조건부 독립이고 조건부 밀도가 있으면
+\[
+2^{\frac2n h(A^n+B^n\mid C)}\ \ge\ 2^{\frac2nh(A^n\mid C)}+2^{\frac2nh(B^n\mid C)},\qquad
+2^{\frac2nh(cA^n\mid C)}=c^2\,2^{\frac2nh(A^n\mid C)}.
+\]
+여러 항이면 합으로 확장된다.
+
+\begin{thmbox}
+\textbf{정리 W3 (대칭 가우시안 CEO 합 율).} $D_{\min}:=(1/P+K/N)^{-1}<D\le P$이면
+\[
+R_{\mathrm{sum}}(D)=\tfrac12\log\frac PD+\frac K2\log\frac{KPD}{KPD-N(P-D)}.
+\]
+이 작업장은 \textbf{역}($\ge$)을 증명한다. 달성은 Berger–Tung + 가우시안 시험 채널로 등호가 됨을 5부에서 확인한다.
+\end{thmbox}
+
+\textbf{정의.} $r_k:=\frac1nI(Y_k^n;M_k\mid X^n)$. “$X$를 알아도 $M_k$에 남는 정보”, 즉 작업자 $k$가 자기 잡음을 기술하는 데 쓴 율이다.
+
+\section*{1부. 율을 “$X$ 정보 + 잡음 정보”로 쪼갠다}
+\steptable{
+1.1 & $nR_{\mathrm{sum}}\ge H(M^K)$ \ ($M^K:=(M_1,\dots,M_K)$) & \\
+1.2 & $H(M^K)\ge I(Y^{Kn};M^K)$ & \\
+1.3 & $I(Y^{Kn};M^K)=I(X^n,Y^{Kn};M^K)$ & \\
+1.4 & $=I(X^n;M^K)+I(Y^{Kn};M^K\mid X^n)$ & \\
+1.5 & $I(Y^{Kn};M^K\mid X^n)=H(M^K\mid X^n)$ & \\
+1.6 & $H(M^K\mid X^n)=\sum_kH(M_k\mid X^n)=\sum_k nr_k$ & \\
+1.7 & $I(X^n;M^K)\ge\frac n2\log\frac PD$ & W1 2부 (f)–(j)\\
+}
+결과: \quad $R_{\mathrm{sum}}\ \ge\ \frac12\log\frac PD+\sum_kr_k.$ \hfill (I)
+
+\section*{2부. $I(X^n;M^K)$의 상한 — EPI가 쓰이는 곳}
+목표: \quad $2^{\frac2nI(X^n;M^K)}\le1+\sum_k\frac PN\big(1-2^{-2r_k}\big)$. \hfill (II)
+
+\textbf{(2-a) 분해.} $\tilde N:=(1/P+K/N)^{-1}$, \ $\tilde X_i:=\E[X_i\mid Y_{1i},\dots,Y_{Ki}]=\sum_k\frac{\tilde N}{N}Y_{ki}$. 그러면 $X^n=\tilde X^n+\tilde Z^n$, $\tilde Z^n$ i.i.d. $\mathcal N(0,\tilde N)$이고 $Y^{Kn}$과 독립.
+
+\steptable{
+2.1 & $\tilde X_i$의 계수가 $\tilde N/N$이고 오차 분산이 $\tilde N$이다 & \\
+2.2 & $\tilde Z^n$은 $(\tilde X^n,M^K)$와 독립이다 & \\
+2.3 & (2-b) $A:=2^{\frac2nh(X^n\mid M^K)}\ \ge\ 2^{\frac2nh(\tilde X^n\mid M^K)}+2\pi e\tilde N$ & \\
+2.4 & $h(\tilde X^n\mid M^K)=h(\tilde X^n\mid X^n,M^K)+I(\tilde X^n;X^n\mid M^K)$ & \\
+2.5 & (2-c) $2^{\frac2nh(\tilde X^n\mid X^n,M^K)}\ge\sum_k\frac{\tilde N^2}{N^2}2^{\frac2nh(Y_k^n\mid X^n,M_k)}$ & \\
+2.6 & $h(Y_k^n\mid X^n,M_k)=\frac n2\log(2\pi eN)-nr_k$ & \\
+2.7 & (2-d) $2^{\frac2nI(\tilde X^n;X^n\mid M^K)}=A/(2\pi e\tilde N)$ & \\
+2.8 & (2-e) $A\ge cA+2\pi e\tilde N$, \ $c:=\sum_k\frac{\tilde N}{N}2^{-2r_k}<1$ & \\
+2.9 & $2^{\frac2nI(X^n;M^K)}=2\pi eP/A\le\frac P{\tilde N}(1-c)=1+\sum_k\frac PN(1-2^{-2r_k})$ & \\
+}
+
+\section*{3부. 결합과 최소화}
+\steptable{
+3.1 & (II)와 1.7에서 \ $\frac1D\le\frac1P+\sum_k\frac{1-2^{-2r_k}}N$ \quad(Oohama 보조정리) & \\
+3.2 & $f(r)=1-2^{-2r}$은 오목하다 & \\
+3.3 & $\sum r_k$를 고정하면 제약을 가장 잘 만족시키는 것은 모두 같은 $r$일 때다 & \\
+3.4 & 최소 $r$은 3.1을 등호로 만드는 값: $2^{-2r}=1-\frac{N(P-D)}{KPD}$ & \\
+3.5 & (I)에 넣으면 정리 W3의 식 & (대수)\\
+}
+
+\textbf{연습 3.6 (극한 점검).} (i) $D=P$, (ii) $D\downarrow D_{\min}$, (iii) $K=1$, (iv) $K\to\infty$ ($D$ 고정)에서 $R_{\mathrm{sum}}$이 어떻게 되는지 쓰고 의미를 말하라.
+\vspace{4em}
+
+\textbf{연습 3.7 (숫자).} $P=1$, $N=0.5$, $K=4$, $D=0.2$에서 $D_{\min}$, $r$, $R_{\mathrm{sum}}$을 계산하라. 모든 관측을 한곳에서 보는 중앙 부호기의 율과 비교하라. \hfill\blank
+
+\section*{4부. 불편 제약판 (Zhang 2023)}
+\textbf{연습 4.1.} $\hat X^n$이 불편($\E[\hat X^n\mid X^n]=X^n$)이면 1.7을 $I(X^n;M^K)\ge\frac n2\log(1+P/D)$로 조일 수 있다. (i) 이 부등식을 증명하라. (ii) 3부를 다시 하여 $R_{\mathrm{sum}}=\frac12\log(1+P/D)+\frac K2\log\frac{KD}{KD-N}$을 얻고, Zhang 2023 식 (22)와 같은지 확인하라.
+\vspace{5em}
+
+\section*{5부. 달성은 등호다 (확인만)}
+\textbf{연습 5.1.} 시험 채널 $U_k=Y_k+V_k$, $V_k\sim\mathcal N(0,Q)$에서 $I(Y_k;U_k\mid X)=\frac12\log\frac{N+Q}Q$와 $\Var(X\mid U^K)^{-1}=\frac1P+\frac K{N+Q}$를 보이고, $Q=N\,2^{-2r}/(1-2^{-2r})$로 두면 3.1과 (I)가 모두 등호가 됨을 확인하라.
+\vspace{4em}
+
+\begin{bridge}
+\textbf{이 연구로 넘어가는 다리.} 군 합에서는 복호기가 $M^K$ 대신 $Z=\bigoplus_kQ_k$ 하나만 본다. 1부를 $Z$로 다시 쓰면
+\[
+\log|G|\ \ge\ H(Z\mid W)=I(X;Z\mid W)+H(Z\mid X,W).
+\]
+첫 항은 1.7과 같은 방법으로 $\ge\frac12\log(P/D)$. 둘째 항은 1.6처럼 \textbf{합 $\sum_kr_k$로 갈라지지 않는다}. $Z$는 메시지 묶음이 아니라 합 하나이기 때문이다. 쉽게 얻는 하한은 $\max_k$ 수준이고, $\sum_k$와 $K$배 차이가 난다. 이 둘째 항의 올바른 크기($\approx\frac12\log K$)를 잡는 것이 W4다.
+
+\textbf{연습 5.2.} 위 문단의 “쉽게 얻는 하한 $H(Z\mid X,W)\ge\max_k H(Q_k\mid X,W)$”는 참인가? 증명하거나 반례를 들어라. (힌트: 유한 군에서 독립인 두 변수의 합.)
+\vspace{3em}
+\end{bridge}
+
+\newpage
+\section*{부록 A. 힌트}
+\begin{itemize}[leftmargin=2.2em]
+\item[1.2] $H(M^K)\ge H(M^K)-H(M^K\mid Y^{Kn})$, 이산 변수의 조건부 엔트로피 $\ge0$.
+\item[1.3] $M^K$는 $Y^{Kn}$의 함수라 $X^n$을 더해도 상호정보가 그대로다($M^K-Y^{Kn}-X^n$).
+\item[1.4] 연쇄 법칙.
+\item[1.5] $M^K$가 $Y^{Kn}$의 함수이므로 $H(M^K\mid X^n,Y^{Kn})=0$.
+\item[1.6] $X^n$이 주어지면 $Y_k^n$들이 독립이고 $M_k$는 $Y_k^n$만의 함수. 다시 1.5처럼 $H(M_k\mid X^n)=I(Y_k^n;M_k\mid X^n)$.
+\item[2.1] 정밀도 덧셈: 사후 정밀도 $=1/P+K/N=1/\tilde N$. 가우시안 MMSE 계수 = (오차 분산)$\times$(각 관측 정밀도).
+\item[2.2] 가우시안에서 MMSE 오차는 관측과 독립. $\tilde X^n$과 $M^K$는 둘 다 $Y^{Kn}$의 함수.
+\item[2.3] 2.2로 $M^K$가 주어지면 $\tilde X^n$과 $\tilde Z^n$은 조건부 독립. 조건부 EPI, $h(\tilde Z^n\mid M^K)=h(\tilde Z^n)$.
+\item[2.4] 상호정보의 정의.
+\item[2.5] $X^n$이 주어지면 $\tilde X^n=$ 상수 $+\sum_k\frac{\tilde N}NN_k^n$이고, $(X^n,M^K)$가 주어지면 항 $\frac{\tilde N}NY_k^n$들이 조건부 독립. 여러 항 조건부 EPI. $M_j$ ($j\ne k$)는 $(X^n,M_k)$가 주어지면 $Y_k^n$과 독립이라 조건에서 뺄 수 있다.
+\item[2.6] $h(Y_k^n\mid X^n,M_k)=h(Y_k^n\mid X^n)-I(Y_k^n;M_k\mid X^n)$, $h(Y_k^n\mid X^n)=h(N_k^n)$.
+\item[2.7] $h(X^n\mid\tilde X^n,M^K)=h(\tilde Z^n)$ (평행 이동 + 2.2).
+\item[2.8] 2.3–2.7을 모은다. $\sum_k\tilde N/N=K\tilde N/N<1$.
+\item[2.9] $A\ge2\pi e\tilde N/(1-c)$, $P/\tilde N=1+KP/N$.
+\item[3.3] 옌센: $\sum f(r_k)\le Kf(\bar r)$. 평균 $\bar r$로 바꿔도 제약을 만족하고 합은 같다.
+\item[4.1(i)] $\E[(\hat X-X)X]=\E[X\,\E[\hat X-X\mid X]]=0$ $\Rightarrow$ $\Var(\hat X)=P+D$. $X$를 $\hat X$로 선형 추정하면 오차 분산 $PD/(P+D)$. 최대 엔트로피.
+\item[5.2] 독립인 $A,B$에 대해 $H(A\oplus B)\ge H(A\oplus B\mid B)$이고, $B$가 주어지면 $A\mapsto A\oplus B$는 일대일이다.
+\end{itemize}
+
+\section*{부록 B. 답}
+\begin{itemize}[leftmargin=2.2em]
+\item[3.6] (i) $0$ (평균으로 추정). (ii) $\infty$, 속도 $\frac K2\log\frac1{D-D_{\min}}$로 중앙 부호기보다 $K$배 빠르다. (iii) 원격 소스 율-왜곡 $\frac12\log\frac{P-D_{\min}}{D-D_{\min}}$. (iv) 유한: $\frac12\log\frac PD+\frac{N(P-D)}{2PD}\log e$. 작업자당 율 $\to0$.
+\item[3.7] $D_{\min}=0.5/4.5\approx0.111$. $KPD=0.8$, $N(P-D)=0.4$ $\Rightarrow$ $r=\frac12\log_22=0.5$. $R_{\mathrm{sum}}=\frac12\log_25+2\approx3.161$비트. 중앙 부호기 $\frac12\log_2\frac{P-D_{\min}}{D-D_{\min}}=\frac12\log_210\approx1.661$. 분산의 대가 1.5비트.
+\item[4.1(ii)] 3.1이 $\frac1D\le\sum_k\frac{1-2^{-2r_k}}N$로 바뀌어 $2^{-2r}=1-\frac N{KD}$. 그러면 $\frac K2\log\frac{KD}{KD-N}=\frac K2\log(1+\frac N{KD-N})$로 Zhang (22)와 같다(단위만 nats↔비트).
+\item[5.2] 참이다. $X,W$가 주어지면 $Q_k$들은 독립이고, 독립 $A,B$에 대해 $H(A\oplus B)\ge H(A\oplus B\mid B)=H(A)$. 그러나 이것은 $\max_k$일 뿐 $\sum_k$나 $+\frac12\log K$를 주지 않는다.
+\end{itemize}
+\vspace{1em}
+\small\textcolor{ink!60}{EPI 증명 단계는 교재 노트 3.7.4와 원문 PDF 329–330쪽을 대조해 확인함. 다음: W4 찌꺼기 항.}
+\end{document}

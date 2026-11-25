@@ -1,0 +1,122 @@
+\input{preamble.tex}
+\title{\sffamily 작업장 W5\\[2pt]\large 조립: 사다리 C단계의 정리와 남은 열린 문제}
+\author{}
+\date{2026-11-22}
+\begin{document}
+\maketitle
+\vspace{-2.5em}
+\begin{center}\small
+선행: W1(역정리 사슬), W2(달성), W3(기준선), W4(찌꺼기 항). 사다리: \texttt{draft.md} 정리 골격 v1, \texttt{SPEC.md} P절.
+\end{center}
+
+\textbf{사용법.} 이 작업장은 앞의 네 작업장을 하나의 정리로 묶고, 그 정리가 \emph{어디까지} 증명됐고 \emph{어디서부터} 연구인지를 정확히 표시한다. 1–3부는 채우는 표, 4부는 열린 문제다.
+
+\section*{0. 지금까지 가진 것}
+\begin{center}\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{@{}lYl@{}}
+\toprule
+출처 & 내용 & 성립 범위\\ \midrule
+W1 2부 & $\log|G|\ge H(Z\mid W)=I(X;Z\mid W)+H(Z\mid X,W)$, \ $I(X;Z\mid W)\ge\frac12\log(\sX/D)$ & 모든 부호\\
+W3 4부 & 불편 복호기면 $I(X;Z\mid W)\ge\frac12\log(1+\sX/D)$ & 모든 불편 부호\\
+W3 & 제약 없는 기준선: 하행 $\frac12\log(1+\sX/D)$, 작업자당 상행 $r=\frac12\log\frac{KD}{KD-\sN}$ (불편) & 모든 부호\\
+W4 (a)(b)(c) & $H(S\mid X,W)\gtrsim\frac12\log K+\log\frac{\sigma_N}\Delta$, \ $H(S\mid W)\gtrsim\log K+\log\frac{\sigma_X}\Delta$ & 부호기군 $\mathcal F_\Delta$\\
+W2 & $\log M\le\log K+\log\frac{\sigma_X}\Delta+\log(2a)+o(1)$, \ $D\le\frac{\sN+\Delta^2/12}K+\varepsilon(a)$ & 방식 $\mathcal S(\Delta,M)$\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section*{1부. 정리 C (사다리 C단계)}
+\begin{thmbox}
+\textbf{정리 C.} 부호기군 $\mathcal F_\Delta$(작업자별 독립 디더, 눈금 $\Delta$)와 임의의 $M$, 임의의 복호기 $g(Z,W)$에 대해
+\begin{align*}
+\text{(i)}\quad R_{\mathrm{down}}&\ge\log\frac{K+1}2+\frac12\log\frac{2\pi e(\sX+\sN/K)}{\Delta^2}-H(J),\\
+\text{(ii)}\quad R_{\mathrm{down}}&\ge\frac12\log\frac{\sX}D+\frac12\log K-1+\frac12\log\frac{2\pi e\sN}{\Delta^2}-H(J).
+\end{align*}
+불편 복호기면 (ii)의 첫 항을 $\frac12\log(1+\sX/D)$로 바꿀 수 있다. 또 W2에 의해 같은 $\Delta$에서 $R_{\mathrm{down}}\le\log K+\log(\sigma_X/\Delta)+O(\log\log K)$가 달성된다.
+\end{thmbox}
+
+\steptable{
+1.1 & $R_{\mathrm{down}}=\log M\ge H(Z\mid W)$ & \\
+1.2 & (i): $H(Z\mid W)\ge H(S\mid W)-H(J)$와 W4(b) & \\
+1.3 & (ii): $H(Z\mid W)=I(X;Z\mid W)+H(Z\mid X,W)$ & \\
+1.4 & $I(X;Z\mid W)\ge\frac12\log(\sX/D)$ & \\
+1.5 & $H(Z\mid X,W)\ge H(S\mid X,W)-H(J)$와 W4(a) & \\
+}
+
+\section*{2부. 해상도를 목표에 맞추면: $\tfrac12\log K$ 간극}
+\textbf{따름정리 C$'$.} 목표 $D\approx\theta\sN/K$에 W2가 쓰는 눈금 $\Delta=\sqrt{12(\theta-1)}\,\sigma_N$을 두면, 부호기군 $\mathcal F_\Delta$ 안에서
+\[
+R_{\mathrm{down}}=\log_2K+\tfrac12\log_2\gamma+O(\log\log K),
+\qquad
+R_{\mathrm{down}}-\underbrace{\tfrac12\log_2\!\big(1+K\gamma/\theta\big)}_{\text{제약 없는 하행}}=\tfrac12\log_2K+O(\log\log K).
+\]
+
+\steptable{
+2.1 & (i)에서 $\log\frac{K+1}2\ge\log K-1$, \ $\frac12\log\frac{2\pi e\sX}{\Delta^2}=\frac12\log\frac{2\pi e\gamma}{12(\theta-1)}$ & \\
+2.2 & 따라서 하한 $=\log K+\frac12\log\gamma-c_1(\theta)-H(J)$ & (대수)\\
+2.3 & W2 따름정리에서 상한 $=\log K+\frac12\log\gamma+c_2(\theta)+O(\log\log K)$ & \\
+2.4 & 제약 없는 하행 $\frac12\log(1+K\gamma/\theta)=\frac12\log K+\frac12\log\gamma-\frac12\log\theta+o(1)$ & \\
+2.5 & 빼면 간극 $\frac12\log K+O(\log\log K)$ & (대수)\\
+}
+
+\textbf{연습 2.6} $c_1(\theta)$, $c_2(\theta)$를 구체적으로 쓰라. $\theta=2$에서 숫자로. \vspace{3em}
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{rccccc}
+\toprule
+$K$ & 하한 (i) & 하한 (ii, 불편) & 상한 W2 ($a=12$) & 상한 (가우시안 근사) & 제약 없는 하행\\ \midrule
+4 & 1.74 & 1.37 & 5.67 & 3.88 & 0.79\\
+16 & 3.39 & 2.93 & 6.87 & 5.40 & 1.58\\
+64 & 5.29 & 4.80 & 8.81 & 7.23 & 2.52\\
+256 & 7.26 & 6.77 & 10.80 & 9.18 & 3.51\\
+1024 & 9.26 & 8.76 & 12.79 & 11.17 & 4.50\\
+\bottomrule
+\end{tabular}\\[2pt]
+$\sX=\sN=1$, $\theta=2$, $\Delta=\sqrt{12}$, $D=2/K$, 비트. $H(J)$는 $a=12$에서 $10^{-5}$ 이하라 뺐다. 하한·상한은 $K$가 4배일 때 약 2비트, 제약 없는 하행은 1비트 오른다.
+\end{center}
+
+\textbf{연습 2.7} 표에서 (i)이 (ii)보다 큰 이유를 W4 연습 2.8의 답과 연결해 설명하라. \vspace{3em}
+
+\section*{3부. 논문에 쓸 수 있는 진술}
+\begin{bridge}
+\textbf{지금 증명된 것 (C단계).} “작업자별 독립 디더를 쓰는 균일 양자화 군 합 부호는, 목표 왜곡 $\theta\sN/K$에 맞춘 해상도에서 하행 레지스터에 $\log_2K+\frac12\log_2\gamma+O(\log\log K)$비트가 필요충분하다. 이는 제약 없는 CEO보다 $\frac12\log_2K$비트 많다.”
+
+\textbf{이것만으로 부족한 이유.} 이 진술은 (1) 부호기군을 $\mathcal F_\Delta$로 한정하고, (2) 해상도 $\Delta$를 목표에 맞춘다고 가정한다. 심사자는 “다른 부호기나 다른 $\Delta$로 피할 수 있지 않은가”를 물을 것이다. 4부가 그 질문들이다.
+\end{bridge}
+
+\section*{4부. 열린 문제 (여기서부터 연구)}
+\begin{openprob}
+\textbf{O1. 해상도–왜곡 연결.} 부호기군 $\mathcal F_\Delta$에서 임의의 복호기가 $D\le\theta\sN/K$를 내려면 $\Delta=O(\sigma_N)$이어야 함을 보여라. 즉 $\mathrm{mmse}(X\mid Z,W)\ge D_{\min}+c\,\Delta^2/K$.\\
+\emph{시도와 실패:} W4처럼 $N'$을 조건으로 두면 칸 길이가 $\Delta/K$가 되어 $c\Delta^2/K^2$밖에 안 나온다. $N'$을 모르는 상태의 평균을 다뤄야 한다. $K=1$부터 해 볼 것.
+
+\textbf{O2. 일반 스칼라 부호기 (B단계 = 보조정리 L).} $f_k(Y_k,W)\in\mathbb Z_M$가 임의일 때 $H(Z\mid X,W)\ge\frac12\log K-c$를 $D$와 연결해 보여라.\\
+\emph{살아남는 도구:} 보조정리 B(공통 성분 $\bar G$의 분리)는 부호기와 무관하다. 무너지는 것: 보조정리 C의 단조성. 후보: $t\mapsto f_k(c_k+t,W)$의 “$t$에 대한 민감도”를 왜곡으로 하한하고, 군 $\mathbb Z_M$ 위 독립 합의 엔트로피 성장(이산 EPI, 합집합 엔트로피; \texttt{papers/modern/Tao\_sumset\_entropy.pdf} 등)으로 넘긴다. 부분군에 갇히는 경우(D1)를 따로 처리해야 한다.
+
+\textbf{O3. 블록 부호 (A단계).} 찌꺼기가 $\frac n2\log K$로 자라는가. 보조정리 D의 격자판(디더가 보로노이 칸 위 균일, 경계가 $\mathbb R^n/\Lambda$ 위에 흩어짐)이 후보.
+
+\textbf{O4. 공유 디더의 교환 (새 현상 후보, D3).} W4 연습 4.1: 디더를 공유하면 찌꺼기는 줄지만 양자화 오차가 평균되지 않는다. “찌꺼기 $\times$ 왜곡”의 교환 곡선을 정확히 구하면, 저율 영역에서 대가가 줄어드는 조건이 나올 수 있다.
+\end{openprob}
+
+\textbf{연습 4.1 (연구 첫걸음).} O1을 $K=1$에서 풀어 보라: $\mathrm{mmse}(X\mid q_1,U_1)\ge D_{\min}+c\Delta^2$인가? ($Y_1=X+N_1$, 빼는 디더 양자화. 힌트: $(q_1,U_1)$이 주어지면 $Y_1$은 길이 $\Delta$인 구간 안에 있다. 그 구간이 $\sigma_N$보다 넓으면?)
+\vspace{6em}
+
+\newpage
+\section*{부록 A. 힌트}
+\begin{itemize}[leftmargin=2.2em]
+\item[1.1] $Z$는 $M$개 값 중 하나. 조건부 엔트로피 $\le$ 엔트로피 $\le\log M$.
+\item[1.4] W1 2부의 (d)–(j)를 $M$ 대신 $(Z,W)$로. $\hat X=g(Z,W)$.
+\item[2.3] W2 따름정리 W2$'$.
+\item[2.4] $K\to\infty$에서 $\log(1+x)=\log x+o(1)$.
+\end{itemize}
+
+\section*{부록 B. 답}
+\begin{itemize}[leftmargin=2.2em]
+\item[2.6] $c_1(\theta)=1-\frac12\log_2(2\pi e)+\frac12\log_2(12(\theta-1))$; $\theta=2$면 $1-2.047+1.792\approx0.745$. \ $c_2(\theta)=-\frac12\log_2(12(\theta-1))+\log_2(2a)$; 고정 $a=12$, $\theta=2$면 $-1.792+4.585\approx2.79$. 하한·상한의 상수 차이는 약 3.5비트이고, 대부분은 W2의 꼬리 여유($\log_2 2a$)에서 온다.
+\item[2.7] (i)은 $H(Z\mid W)$ 전체를 바로 하한한다(신호 $X$의 폭 $\sigma_X$를 칸 $2\Delta/(K+1)$로 재므로 $\log K$ 전체). (ii)는 $I(X;Z\mid W)$를 왜곡만으로 하한하는데($\frac12\log(1/D)$, 이미 $\frac12\log K$ 포함), 그 과정에서 상수를 조금 잃는다. 차수는 같다.
+\item[4.1] (방향만) $\Delta\gg\sigma_N$이면 구간 정보가 $Y_1$을 거의 고정하지 못해 $X$의 추정 오차에 $\Delta^2/12$ 수준이 남는다는 것을 보이면 된다. 엄밀한 하한은 열린 문제로 남긴다.
+\end{itemize}
+\vspace{1em}
+\small\textcolor{ink!60}{표의 수치는 Python으로 계산함 (scratchpad/w25nums.py, w4check.py).}
+\end{document}

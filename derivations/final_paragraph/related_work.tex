@@ -1,0 +1,125 @@
+% 관련 연구 및 문제 설정 문단. tectonic으로 컴파일: tectonic related_work.tex
+% 2026-11-25 피드백(feedback/질문방-2026-11-25 (3)–(7).md) 검증 후 반영.
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont={Apple SD Gothic Neo Bold},ItalicFont={AppleMyungjo},ItalicFeatures={FakeSlant=0.18}]{AppleMyungjo}
+\setCJKsansfont{Apple SD Gothic Neo}
+\setCJKmonofont{Apple SD Gothic Neo}
+\xeCJKsetup{CJKspace=true,CJKecglue={},xCJKecglue=false}
+\usepackage{amsmath,amssymb,mathtools,bm}
+\usepackage[margin=25mm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\linespread{1.35}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{1em}
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\I}{I}
+\newcommand{\Yt}{\tilde{Y}}
+\newcommand{\Yh}{\hat{Y}}
+\newcommand{\softmax}{\operatorname{softmax}}
+\newcommand{\Cat}{\operatorname{Cat}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\renewcommand{\refname}{참고문헌}
+
+\title{관련 연구 및 문제 설정}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-3em}
+
+\section{유한 부호 길이 영역과 결합 원천-채널 부호화}
+
+6G의 초고신뢰 저지연 통신(URLLC)과 시각-언어 모델(VLM) 기반 엣지 추론은 짧은 블록과 엄격한 지연 제약 아래에서 동작한다. 그래서 부호 길이가 무한하다고 가정하는 Shannon의 점근적 결과만으로는 성능 한계를 정확히 규명할 수 없다. 원천 길이 $k$와 부호 길이 $n$이 유한한 영역에서는 비점근 정보이론으로 달성 가능성 한계(achievability bound)와 역 한계(converse bound)를 구한다 \cite{gao2025fbl}. 대표적으로 Kostina와 Verdú는 $\mathsf{d}$-기울인 정보(d-tilted information) $\jmath_S(s,d)$를 정의했다 \cite{kostina2012, kostina2013}. 그 평균인 율-왜곡 함수 $R(d)=\E[\jmath_S(S,d)]$와 분산인 원천 분산도(source dispersion) $\mathcal{V}(d)=\operatorname{Var}[\jmath_S(S,d)]$로 유한 길이 손실 압축과 손실 결합 원천-채널 부호화(JSCC)의 한계를 2차 항까지 유도했다. $R(d)$와 최적 테스트 채널은 Blahut--Arimoto(BA) 알고리즘으로 계산할 수 있다 \cite{blahut1972, arimoto1972}.
+
+점근 영역에서는 원천-채널 분리 정리에 따라 분리 부호화(SSCC)로도 최적에 도달한다. 그러나 유한 길이에서는 분리 설계가 일반적으로 2차 항 손실을 입는다. 정규화한 채널 정보 밀도를 $I$, 정규화한 $\mathsf{d}$-기울인 정보를 $J$라 하자. 결합 부호화는 사건 $\{I>J\}$만 일어나면 원천을 왜곡 $d$ 이내로 복원한다. 반면 분리 부호화는 두 부호 사이의 중간 율 $r$에 대해 사건 $\{I>r\}\cap\{J<r\}$이 일어나야 한다. 뒤의 사건은 앞 사건의 진부분집합이므로, 같은 오류 확률에서 달성 가능한 부호율이 낮아진다. 다만 원천 분산도와 채널 분산도 가운데 하나라도 0이면 분리 부호화로도 결합 설계와 같은 분산도를 얻는다 \cite{gao2025fbl}.
+
+딥러닝 기반 JSCC는 신경망 부호기와 복호기를 종단 간(end-to-end)으로 학습한다. 이렇게 이미지, 비디오, 의미 특징을 채널 심볼로 직접 사상한다. 초기 형태는 대역폭 압축비, 곧 채널 심볼 수와 원천 차원의 비, 그리고 학습 SNR을 고정하고 복원 왜곡(MSE)을 최소화했다 \cite{bourtsoulatze2019}. 이 방식은 채널 상태가 나빠질 때 분리 설계의 절벽 효과(cliff effect) 없이 성능이 점진적으로 저하되고, 학습 때와 다른 SNR에서도 강인함을 실험으로 보였다 \cite{bourtsoulatze2019}. 또한 채널 출력 되먹임을 도입한 JSCC는 전송 지연을 줄인다고 보고되었다 \cite{gao2025fbl}. 이후 채널 조건에 따라 압축률과 등화 여부를 적응적으로 정하는 방식으로 발전했다. Seon 등의 방식에서는 송신 측 DRL 에이전트가 추정 SNR을 바탕으로 압축률을 고르고, 수신 측 DRL 에이전트가 VAE 등화 수행 여부를 고른다 \cite{seon2025}. 두 에이전트는 추정 SNR과 짧은 참조 부호로 이루어진 부분 채널 상태 정보(CSI)를 입력으로 받는다. VAE 등화기는 수신 신호의 실수부와 허수부로부터 채널 $\hat B$를 블라인드 추정하고, $\hat B^{-1}y$로 등화한다. 학습 손실에는 실제 채널이 들어가지만, 추론할 때는 MMSE와 달리 채널 행렬 없이 등화할 수 있다.
+
+\section{과업 지향 부호화의 목적 함수}
+
+과업 지향 부호화의 목적 함수는 정보 병목(IB, information bottleneck)으로 정식화할 수 있다 \cite{tishby1999}. 부호기는 입력 $X$만 보고 표현 $T$를 만들므로 마르코프 사슬 $Y - X - T$가 성립한다. 여기서 $Y$는 과업 변수다.
+\begin{equation}
+\min_{p(t\mid x)}\; \I(X;T) - \beta\, \I(T;Y)
+\label{eq:ib}
+\end{equation}
+$\I(X;T)$는 $T$가 $X$에 대해 담는 정보량, 곧 전송해야 할 율이다. $\I(T;Y)$는 $T$가 $Y$에 대해 담는 관련 정보, 곧 과업 성능이다. 두 항은 서로 상충하며, 라그랑주 승수 $\beta$가 그 균형을 정한다. $\I(T;Y)\le \I(X;T)$이므로 $\beta\le1$이면 $T$가 $X$와 독립인 자명한 해가 최적이고, 실제로는 어떤 임계값 $\beta_c\ge1$ 아래에서 율이 0이 된다. $\beta$가 커질수록 $T$는 데이터 처리 부등식의 상한 $\I(T;Y)\le \I(X;Y)$에 도달하는 최소 충분 통계량에 다가간다.
+
+식~\eqref{eq:ib}는 다음 간접 율-왜곡 문제와 직접 연결된다.
+\begin{equation}
+\min_{p(t\mid x)}\; \I(X;T) \quad \text{s.t.} \quad \E\bigl[d(Y,\Yh)\bigr] \le D
+\label{eq:ird}
+\end{equation}
+부호기가 보지 못한 $Y$를 복원하므로 간접(indirect) 문제라 부르며, 최적화 대상은 부호기, 곧 테스트 채널 $p(t\mid x)$다. 분류 과업에서 $Y$는 범주형 변수이므로, 왜곡 척도의 대표적인 선택은 0-1(해밍) 왜곡과 로그 손실이다. 0-1 왜곡 $d(y,\hat y)=\mathbf{1}\{y\ne\hat y\}$의 기댓값은 오류 확률 $\P(\Yh\ne Y)$다 \cite{enttsel2026}. 로그 손실에서는 복원값이 라벨이 아니라 $Y$ 위의 확률분포 $\Yh=q(\cdot\mid T)$이며, 그 기댓값은 다음과 같이 분해된다.
+\begin{equation}
+\E\bigl[-\log q(Y\mid T)\bigr] = H(Y\mid T) + \E\bigl[\KL\bigl(p(\cdot\mid T)\,\big\|\,q(\cdot\mid T)\bigr)\bigr]
+\end{equation}
+따라서 최솟값은 $q=p(\cdot\mid t)$일 때의 $H(Y\mid T)=H(Y)-\I(T;Y)$다. 곧 로그 손실 아래에서 식~\eqref{eq:ird}의 왜곡 제약은 $\I(T;Y)\ge H(Y)-D$와 같고, 이 제약 문제의 라그랑주 형태가 식~\eqref{eq:ib}이다. $q$를 신경망 분류기로 두면 이 기댓값은 분류 모델 학습에 쓰는 교차 엔트로피 손실이다.
+
+\section{softmax 출력과 압축 전략}
+
+softmax 기반 분류 모델은 로짓 $f(x)\in\mathbb{R}^{K}$로부터 사후 확률 벡터를 출력한다. 여기서 $K$는 클래스 수다.
+\begin{equation}
+V = \softmax\bigl[f(X)\bigr]
+\label{eq:v}
+\end{equation}
+softmax는 압축 연산이 아니다. softmax가 잃는 것은 모든 로짓에 같은 상수를 더한 차이뿐이고, 이 상수는 $Y$와 무관하다. 모델의 사후 확률을 참으로 간주하면, 과업 모델을 고정했을 때 $V$는 $Y$에 대한 $X$의 베이즈 충분 통계량이다 \cite{enttsel2026}. 이와 별개로, 확정 라벨 $\Yt=\arg\max V$는 $V$의 함수이므로 $Y - X - V - \Yt$가 마르코프 사슬을 이루고, 데이터 처리 부등식에 따라 $\I(Y;V)\ge \I(Y;\Yt)$다. 이 부등식은 충분성 가정 없이 성립한다.
+
+Enttsel과 Corlay는 과업 모델에 넣기 전에 $X$를 압축하는 압축 후 추정(C\&E)과 함께, 모델 출력 뒤에서 압축하는 전략들을 분석했다 \cite{enttsel2026}. 이 글에서는 뒤의 전략들을 세 갈래로 묶어 정리한다.
+
+첫째, 추정 후 압축(E\&C)은 확정 라벨 $\Yt$를 낸 뒤 압축한다. 무손실 전송에는 $H(\Yt)$ 비트면 충분하며, 이 값은 $\log_2 K$ 이하다. 그보다 낮은 율에서의 한계는 BA 알고리즘으로 계산한다. 이를 개선한 간접 추정 후 압축(iE\&C)은 압축기가 $\Yt$ 자체가 아니라 진짜 라벨 $Y$를 복원하도록 다음 유효 왜곡을 사용한다. 둘째 등호는 $d$가 0-1 왜곡일 때 성립한다.
+\begin{equation}
+\hat d(\tilde y,\hat y) = \E\bigl[d(Y,\hat y)\mid \Yt=\tilde y\bigr] = 1 - \P\bigl(Y=\hat y\mid \Yt=\tilde y\bigr)
+\end{equation}
+그 결과 iE\&C는 E\&C와 같거나 더 낮은 율 한계를 준다. 다만 두 방법 모두 입력이 $\Yt$뿐이어서 $V$에 담긴 모델의 확신도 정보를 버린다.
+
+둘째, 모델 인지 율-왜곡(TMRD)은 $V$ 전체를 원천으로 삼아 간접 율-왜곡 문제를 푼다.
+\begin{equation}
+\min_{p(\hat y\mid v)}\; \I(V;\Yh) \quad \text{s.t.} \quad \E\bigl[d(Y,\Yh)\bigr]\le D
+\end{equation}
+이 한계는 고정된 과업 모델로 얻을 수 있는 최적의 율-왜곡 성능, 곧 최적 한계다. 그러나 $V$가 $K$차원 연속 벡터여서 BA 알고리즘으로 풀 수 없으므로, TMRD는 계산할 수 없는 기준선으로 남는다.
+
+셋째, 그 계산 가능한 대안으로 제시된 것이 표본 추출 후 전송(S\&C)이다. 확정 라벨 대신 사후 분포에서 표본을 하나 뽑는다.
+\begin{equation}
+(\Yh\mid X=x) \sim \Cat\bigl(\softmax[\lambda f(x)]\bigr)
+\end{equation}
+원문은 이를 채널 시뮬레이션(상대 엔트로피 부호화)의 한 예로 보고, 율을 $H(\Yh)$가 아니라 $\I(X;\Yh)$로 잡는다. 역온도 $\lambda\to\infty$이면 무손실 동작점 $(H(\Yt), D_{\mathrm{TM}})$을 되찾고, $\lambda\to0$이면 $\Yh$가 $X$와 독립이 되어 율이 0이 된다. 여기서 $D_{\mathrm{TM}}$은 과업 모델 자체의 오류율이다. 이 방식은 확신도를 표본의 무작위성으로 반영하지만 명시적인 최적성 보장은 없다.
+
+\section{분할 지점}
+
+위 전략들은 모두 과업 모델 전체가 송신기에서 실행된다고 가정한다. 송신기의 메모리와 연산이 제한되면 모델을 분할 지점에서 나눠야 한다. 앞쪽의 과업 전단(front end)은 송신기에서 실행해 중간 특징을 만들고, 이 특징을 압축하거나 JSCC로 전송한다. 뒤쪽의 과업 후단(back end)과 softmax는 수신기에서 실행한다.
+
+Harell 등은 최적 부호화를 가정하고, 특징의 근사값을 과업 후단에 넣은 출력이 과업 모델의 상(image) 안에 있다는 조건 아래에서, 분할 지점이 최소 달성 율에 영향을 주지 않음을 증명했다 \cite{harell2025}. 분류 문제에서는 이 조건이 자명하게 성립한다. 그러나 이 결과는 이론적 최적의 경우에 관한 것이며, 원문도 실제 코덱은 최적이 아니어서 입력을 직접 부호화하는 방식과 모델 분할 방식 사이에 큰 차이가 날 수 있다고 지적한다. 실제 시스템에서 분할 지점은 다음 두 관점에서 성능을 좌우한다.
+
+첫째, 정보이론 관점에서 Enttsel과 Corlay는 배치된 과업 모델을 명시적으로 반영하면 압축 대상에 따라 한계가 달라짐을 보였다 \cite{enttsel2026}.
+\begin{equation}
+R_Y(D) \le R_X(D) \le R_{\Yt}^{\mathrm{iE\&C}}(D) \le R_{\Yt}^{\mathrm{E\&C}}(D)
+\label{eq:order}
+\end{equation}
+여기서 $R_Y$는 $Y$를 직접 관측한다고 가정한 하한, $R_X$는 $X$로부터의 간접 율-왜곡 함수, 뒤의 두 항은 확정 라벨 $\Yt$를 압축하는 iE\&C와 E\&C의 한계다. 원문은 TMRD 한계가 하한 $R_Y$와 과업 모델 의존 한계들 사이에 놓일 것으로 보지만, 이는 정성적 주장이다. 같은 ResNet-50을 서로 다른 두 지점에서 분할한 기존 방식들도 서로 다른 율-정확도 곡선을 보였다. 송신기 모델 크기는 Layer 4의 Block 0에서 나누면 28\,MB, Layer 3의 Block 4에서 나누면 12.16\,MB다. 저자들은 이론 한계와의 율 격차가 주로 송신기 복잡도 제약과 그에 따른 모델 분할 때문이라고 결론지었다.
+
+둘째, 시스템 관점에서 분할 지점은 전송량과 지연을 직접 결정한다. ResNet 계열에서는 거의 모든 중간 특징이 입력보다 큰 데이터 증폭 효과가 나타나, 분할 지점만 바꿔서는 추론 지연을 줄이기 어렵다 \cite{shao2020tradeoff}. Edgent에서는 분할 자체가 정확도를 바꾸지 않는다. 대신 지연 제약 아래에서 분할 지점이 지연을 정하고, 그에 따라 고를 수 있는 조기 종료 지점과 정확도가 정해진다 \cite{li2020edgent}. 페이딩 채널에서 Yan 등은 분할 지점 선택을 최적 정지 문제로 정식화했다. 그리고 단말에 올린 층 수가 주어졌을 때, 관측 SNR이 단계별 임계값 이상이 되는 첫 지점에서 나누는 임계값 정책이 기대 에너지-시간 비용을 최소화함을 증명했다 \cite{yan2021split}. VLA 모델에서도 대역폭이 10\,MB/s에서 1\,MB/s로 떨어지면 기존 최적 분할 지점의 전송 지연이 9.9\,ms에서 99.6\,ms로 늘어난다. 다른 지점으로 옮기면 24.9\,ms로 줄어, 최적 분할 지점이 이동한다는 측정 결과가 보고되었다 \cite{zheng2026roboecc}.
+
+따라서 송신기 복잡도, 고정된 과업 모델, 시변 채널이라는 현실적 제약 아래에서 분할 지점은 율, 정확도, 지연을 함께 결정하는 핵심 설계 변수다. 이 연구는 이 제약 아래에서 부호기의 분할 지점과 구조를 정하는 문제를 다룬다.
+
+\begin{thebibliography}{99}\small
+\bibitem{gao2025fbl} J. Gao, S. Chen, Y. Wu, L. Liu, G. Caire, H. V. Poor, and W. Zhang, ``Finite-blocklength information theory,'' arXiv:2504.07743, 2025.
+\bibitem{kostina2012} V. Kostina and S. Verdú, ``Fixed-length lossy compression in the finite blocklength regime,'' \emph{IEEE Trans. Inf. Theory}, vol.~58, no.~6, pp.~3309--3338, 2012.
+\bibitem{kostina2013} V. Kostina and S. Verdú, ``Lossy joint source-channel coding in the finite blocklength regime,'' \emph{IEEE Trans. Inf. Theory}, vol.~59, no.~5, pp.~2545--2575, 2013.
+\bibitem{blahut1972} R. E. Blahut, ``Computation of channel capacity and rate-distortion functions,'' \emph{IEEE Trans. Inf. Theory}, vol.~18, no.~4, pp.~460--473, 1972.
+\bibitem{arimoto1972} S. Arimoto, ``An algorithm for computing the capacity of arbitrary discrete memoryless channels,'' \emph{IEEE Trans. Inf. Theory}, vol.~18, no.~1, pp.~14--20, 1972.
+\bibitem{bourtsoulatze2019} E. Bourtsoulatze, D. B. Kurka, and D. Gündüz, ``Deep joint source-channel coding for wireless image transmission,'' \emph{IEEE Trans. Cogn. Commun. Netw.}, vol.~5, no.~3, pp.~567--579, 2019.
+\bibitem{seon2025} J. Seon, S. Lee, S. H. Kim, Y. G. Sun, H. Seo, D. I. Kim, and J. Y. Kim, ``Deep reinforced feature compression and channel equalization for semantic communications,'' \emph{IEEE Trans. Cogn. Commun. Netw.}, vol.~11, no.~6, pp.~3655--3668, 2025.
+\bibitem{tishby1999} N. Tishby, F. C. Pereira, and W. Bialek, ``The information bottleneck method,'' in \emph{Proc. Annu. Allerton Conf. Commun., Control, Comput.}, 1999, pp.~368--377.
+\bibitem{enttsel2026} A. Enttsel and V. Corlay, ``Model-aware rate-distortion limits for task-oriented source coding,'' arXiv:2602.12866, 2026.
+\bibitem{harell2025} A. Harell, Y. Foroutan, N. Ahuja, P. Datta, B. Kanzariya, V. S. Somayazulu, O. Tickoo, A. de Andrade, and I. V. Bajić, ``Rate-distortion theory in coding for machines and its applications,'' \emph{IEEE Trans. Pattern Anal. Mach. Intell.}, vol.~47, no.~7, pp.~5501--5519, 2025.
+\bibitem{shao2020tradeoff} J. Shao and J. Zhang, ``Communication-computation trade-off in resource-constrained edge inference,'' \emph{IEEE Commun. Mag.}, vol.~58, no.~12, pp.~20--26, 2020.
+\bibitem{li2020edgent} E. Li, L. Zeng, Z. Zhou, and X. Chen, ``Edge AI: On-demand accelerating deep neural network inference via edge computing,'' \emph{IEEE Trans. Wireless Commun.}, vol.~19, no.~1, pp.~447--457, 2020.
+\bibitem{yan2021split} J. Yan, S. Bi, and Y.-J. A. Zhang, ``Optimal model placement and online model splitting for device-edge co-inference,'' arXiv:2105.13618, 2021.
+\bibitem{zheng2026roboecc} Z. Zheng \emph{et al.}, ``RoboECC: Multi-factor-aware edge-cloud collaborative deployment for VLA models,'' arXiv:2603.20711, 2026.
+\end{thebibliography}
+
+\end{document}

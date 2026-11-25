@@ -1,0 +1,136 @@
+\input{preamble.tex}
+\title{\sffamily 작업장 W4\\[2pt]\large 찌꺼기 항: 독립 디더 균일 양자화에서 $H(Z\mid X,W)\gtrsim\tfrac12\log_2K$}
+\author{}
+\date{2026-11-22}
+\begin{document}
+\maketitle
+\vspace{-2.5em}
+\begin{center}\small
+선행: W2(방식 $\mathcal S$와 디더 성질), W3 끝의 다리. 목표 사다리 C단계(\texttt{draft.md} 정리 골격 v1).\\
+이 작업장의 증명 경로는 2026-11-22에 새로 만든 것이다. 수치 검산은 아래 표(\texttt{scratchpad/w4check.py}).
+\end{center}
+
+\textbf{사용법.} 표의 오른쪽 칸을 채운다. 힌트는 부록 A, 답은 부록 B.
+
+\section*{0. 무엇을 보이려는가}
+방식 $\mathcal S(\Delta,M)$(W2)의 부호기들을 \textbf{부호기군 $\mathcal F_\Delta$}라 부른다: 작업자 $k$는 $q_k=\round((Y_k+U_k)/\Delta)$를 만들고, $U_1,\dots,U_K$는 서로 독립인 $\Unif[-\Delta/2,\Delta/2)$, $W=(U_1,\dots,U_K)$. $S=\sum_kq_k$, $Z=S\bmod M$.
+
+역정리의 분해 $\log M\ge H(Z\mid W)=I(X;Z\mid W)+H(Z\mid X,W)$에서, W1·W3의 고전 문제에서는 둘째 항이 0이거나 버려졌다. 여기서는 그 항이 $K$와 함께 자란다는 것을 보인다.
+
+\begin{thmbox}
+\textbf{정리 W4.} 부호기군 $\mathcal F_\Delta$에서 (로그는 밑 2)
+\begin{align*}
+\text{(a)}\quad H(S\mid X,W)&\ge\log\frac{K+1}{2\sqrt K}+\frac12\log\frac{2\pi e\,\sN}{\Delta^2}\\
+&\ge\frac12\log K-1+\frac12\log\frac{2\pi e\,\sN}{\Delta^2},\\
+\text{(b)}\quad H(S\mid W)&\ge\log\frac{K+1}{2}+\frac12\log\frac{2\pi e\,(\sX+\sN/K)}{\Delta^2},\\
+\text{(c)}\quad H(Z\mid X,W)&\ge H(S\mid X,W)-H(J),\\
+H(Z\mid W)&\ge H(S\mid W)-H(J),
+\end{align*}
+여기서 $J:=(S-c_M(Z))/M\in\mathbb Z$는 감긴 횟수다.
+\end{thmbox}
+
+\section*{1부. 네 가지 보조정리}
+
+\textbf{보조정리 A (구간 분할의 엔트로피).} $T$가 밀도를 갖고, $S$가 고정된 구간 분할에서 $T$가 속한 칸의 번호이면 $H(S)\ge h(T)-\E[\log\ell(T)]$. 여기서 $\ell(t)$는 $t$가 속한 칸의 길이.
+\steptable{
+A.1 & $h(T)=h(T\mid S)+I(S;T)$ & \\
+A.2 & $I(S;T)\le H(S)$ & \\
+A.3 & $h(T\mid S=s)\le\log\ell_s$ & \\
+A.4 & $h(T\mid S)\le\E[\log\ell(T)]$, 따라서 보조정리 A & \\
+}
+
+\textbf{보조정리 B (잡음의 공통 성분).} $\bar G:=\frac1K\sum_kN_k$, $N_k':=N_k-\bar G$. 그러면 $\bar G\sim\mathcal N(0,\sN/K)$이고 $\bar G$는 $N'=(N_1',\dots,N_K')$와 독립.
+\steptable{
+B.1 & $\Cov(N_k',\bar G)=0$ & \\
+B.2 & $(\bar G,N')$은 결합 가우시안이므로 B.1에서 독립 & \\
+}
+
+\textbf{보조정리 C (단조 구조).} $x,u,n'$을 고정하고 $c_k:=x+n_k'+u_k$, $S(t):=\sum_k\round((c_k+t)/\Delta)$로 두자. $\theta_k:=(\Delta/2-c_k)\bmod\Delta$가 서로 다르면:
+\steptable{
+C.1 & $t\mapsto\round((c_k+t)/\Delta)$는 점 $\theta_k+\Delta\mathbb Z$에서만 1씩 오르는 계단 함수 & \\
+C.2 & $S(t)$는 비감소이고 $\bigcup_k(\theta_k+\Delta\mathbb Z)$의 각 점에서 정확히 1씩 오른다 & \\
+C.3 & 따라서 $S(t)$는 그 점들이 만드는 구간 분할에서 $t$가 속한 칸의 번호(서로 다른 칸 = 서로 다른 값) & \\
+}
+
+\textbf{보조정리 D (덮는 호의 길이).} $\theta_1,\dots,\theta_K\stackrel{\text{iid}}\sim\Unif[0,\Delta)$이고 $t$와 독립이면, 보조정리 C의 분할에서 $t$를 담는 칸의 기대 길이는 $\E\,\ell(t)=\dfrac{2\Delta}{K+1}$.
+\steptable{
+D.1 & 회전 불변성으로 $t\equiv0\pmod\Delta$라 해도 된다 & \\
+D.2 & 둘레 $\Delta$인 원 위의 점 $0,\theta_1,\dots,\theta_K$ ($K+1$개)가 만드는 간격 $K+1$개는 교환 가능하고 각 평균 $\Delta/(K+1)$ & \\
+D.3 & $0$을 담는 칸 = $0$의 바로 앞 간격 + 바로 뒤 간격 & \\
+D.4 & 따라서 $\E\,\ell=2\Delta/(K+1)$ & \\
+}
+
+\textbf{연습 D.5} $K=1,2$에서 D를 직접 확인하라. \hfill\blank
+
+\section*{2부. 정리 W4 (a)의 증명}
+\steptable{
+2.1 & $H(S\mid X,W)\ge H(S\mid X,W,N')$ & \\
+2.2 & $(X,W,N')=(x,u,n')$이 주어지면 $Y_k+U_k=c_k+\bar G$이므로 $S=S(\bar G)$ (보조정리 C의 $t=\bar G$) & \\
+2.3 & $\bar G$는 $(X,W,N')$와 독립이고 $h(\bar G)=\frac12\log(2\pi e\sN/K)$ & \\
+2.4 & $H(S\mid x,u,n')\ge h(\bar G)-\E[\log\ell(\bar G)\mid x,u,n']$ & 보조정리 A\\
+2.5 & $\theta_k=(\Delta/2-X-N_k'-U_k)\bmod\Delta$는 i.i.d. 균일이고 $(\bar G,X,N')$와 독립 & \\
+2.6 & $H(S\mid X,W,N')\ge h(\bar G)-\log\E\,\ell(\bar G)=h(\bar G)-\log\frac{2\Delta}{K+1}$ & \\
+2.7 & 정리하면 (a). 둘째 부등식은 $\frac{K+1}{2\sqrt K}\ge\frac{\sqrt K}2$ & (대수)\\
+}
+
+\textbf{연습 2.8 (b) 증명.} 2부를 $N'$만 조건으로 두고 $t=X+\bar G$로 다시 하라. 어디가 달라지는가?
+\vspace{3em}
+
+\section*{3부. 감김 처리 (c)}
+\steptable{
+3.1 & $S=c_M(Z)+MJ$이므로 $S$는 $(Z,J)$의 함수 & \\
+3.2 & $H(S\mid X,W)\le H(Z\mid X,W)+H(J\mid X,W)\le H(Z\mid X,W)+H(J)$ & \\
+3.3 & (정수 최대 엔트로피) 정수 변수 $V$에 대해 $H(V)\le\frac12\log\big(2\pi e(\Var V+\frac1{12})\big)$ & \\
+3.4 & $p:=\Pr(J\ne0)$이면 $H(J)\le h(p)+p\cdot\frac12\log\big(2\pi e(\E[J^2]/p+\frac1{12})\big)$ & \\
+}
+\textbf{연습 3.5.} W2의 방식에서 $a=12$이면 $p\le6.1\times10^{-8}$이다. $H(J)$가 무시할 만큼 작음을 3.4로 보여라(대략값이면 충분). \vspace{3em}
+
+\section*{4부. 수치로 본 정리 (a)}
+\begin{center}\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{rcccccc}
+\toprule
+ & \multicolumn{2}{c}{$\Delta=0.5$} & \multicolumn{2}{c}{$\Delta=1$} & \multicolumn{2}{c}{$\Delta=2$}\\
+$K$ & 실제 & 하한(a) & 실제 & 하한(a) & 실제 & 하한(a)\\ \midrule
+1 & 3.06 & 3.05 & 2.11 & 2.05 & 1.26 & 1.05\\
+4 & 4.06 & 3.37 & 3.11 & 2.37 & 2.25 & 1.37\\
+16 & 5.06 & 4.14 & 4.11 & 3.14 & 3.25 & 2.14\\
+64 & 6.06 & 5.07 & 5.11 & 4.07 & 4.26 & 3.07\\
+\bottomrule
+\end{tabular}\\[2pt]
+$\sN=1$. “실제”는 $H(S\mid X=x,W=u)$를 정확한 합성곱으로 계산해 $(x,u)$ 40개로 평균한 값(비트). 하한은 모든 칸에서 성립하고, 둘 다 $K$가 4배일 때 1비트씩 오른다. 간격은 약 1비트로 일정하다.
+\end{center}
+
+\begin{bridge}
+\textbf{무엇이 $\frac12\log K$를 만드는가.} 작업자별 \emph{독립} 디더가 양자화 경계 $\theta_k$를 원 위에 고르게 흩어, 칸을 길이 $\approx2\Delta/K$로 잘게 만든다. 반면 잡음의 공통 성분 $\bar G$의 폭은 $\sigma_N/\sqrt K$다. 칸 하나에 비해 $\bar G$가 $\sqrt K$배 넓으니 $\frac12\log K$비트가 남는다.
+
+\textbf{연습 4.1 (중요).} 모든 작업자가 \emph{같은} 디더를 쓰고 $\sigma_N\ll\Delta$이면 $\theta_k$들이 한곳에 몰린다. 그러면 2.6의 $\E\ell$은 어떻게 되고 하한은 무엇을 잃는가? W2 연습 1.6(그때 왜곡이 줄지 않음)과 함께 생각하면, 이것은 “찌꺼기를 줄이면 왜곡 평균 이득을 잃는다”는 교환의 첫 사례다. 이 교환을 모든 부호기에 대해 증명하는 것이 보조정리 L이다.
+\vspace{3em}
+\end{bridge}
+
+\newpage
+\section*{부록 A. 힌트}
+\begin{itemize}[leftmargin=2.2em]
+\item[A.2] 이산 $S$에 대해 $I(S;T)=H(S)-H(S\mid T)\le H(S)$.
+\item[A.3] 길이 $\ell$인 구간에 지지된 분포의 미분 엔트로피는 균일일 때 최대 $\log\ell$.
+\item[B.1] $\Cov(N_k,\bar G)=\sN/K$, $\Var\bar G=\sN/K$.
+\item[C.1] $\round(v)$는 $v\in\frac12+\mathbb Z$에서 오른다. $(c_k+t)/\Delta\in\frac12+\mathbb Z$ $\iff$ $t\in\Delta/2-c_k+\Delta\mathbb Z$.
+\item[C.2] 각 항이 비감소이고 서로 다른 항의 계단 위치가 겹치지 않는다.
+\item[D.2] 원 위의 균일 점들의 간격은 디리클레$(1,\dots,1)$ 분포. 고정점 $0$을 하나 넣어도, $0$에서 원을 잘라 선분으로 펴면 $[0,\Delta)$ 위 균일 점 $K$개의 간격 $K+1$개가 된다.
+\item[2.1] 조건을 더하면 엔트로피는 줄거나 같다.
+\item[2.5] $U_k$가 균일이고 나머지와 독립이면 $(U_k+\text{아무것})\bmod\Delta$는 균일이고 그 “아무것”과 독립 (W2 1.1과 같은 논리).
+\item[2.6] 2.4를 평균하고, $-\log$의 볼록성(옌센)으로 $\E\log\ell\le\log\E\ell$. 보조정리 D.
+\item[3.3] $V+U$, $U\sim\Unif[0,1)$ 독립: $h(V+U)=H(V)$. 가우시안 최대 엔트로피.
+\item[3.4] $H(J)=h(p)+(1-p)H(J\mid J=0)+pH(J\mid J\ne0)$, 그리고 $\Var(J\mid J\ne0)\le\E[J^2\mid J\ne0]=\E[J^2]/p$.
+\end{itemize}
+
+\section*{부록 B. 답}
+\begin{itemize}[leftmargin=2.2em]
+\item[D.5] $K=1$: 칸은 하나(길이 $\Delta$), $2\Delta/2=\Delta$ (성립). $K=2$: 두 칸 길이 $L,\Delta-L$, $L\sim\Unif$; 고정점이 긴 칸에 들어갈 확률이 길이에 비례하므로 $\E\ell=\E[L^2+(\Delta-L)^2]/\Delta=2\Delta/3$ (성립).
+\item[2.8] $T=X+\bar G$는 $(W,N')$와 독립이고 분산 $\sX+\sN/K$. $\theta_k=(\Delta/2-N_k'-U_k)\bmod\Delta$도 i.i.d. 균일이고 $T$와 독립. 그러면 $H(S\mid W)\ge h(T)-\log\frac{2\Delta}{K+1}$. 차이는 $\frac12\log K$가 아니라 $\log K$ 전체가 남는다는 점이다($T$의 폭이 $\sigma_X$로 $K$에 무관).
+\item[3.5] $h(p)\approx p\log_2(1/p)\approx1.5\times10^{-6}$. 둘째 항은 $p\log_2(\E[J^2]/p)$ 꼴로 역시 $10^{-5}$ 이하 (꼬리 때문에 $\E[J^2]$도 $p$ 수준). 즉 $H(J)\lesssim10^{-5}$비트.
+\item[4.1] 디더가 같고 잡음이 작으면 모든 $\theta_k$가 거의 같은 곳에 있어, $t$를 담는 칸은 거의 길이 $\Delta$인 큰 칸이다. $\E\ell\approx\Delta$이면 하한에서 $\log\frac{K+1}2$가 사라진다. 실제로도 $S\approx Kq$가 되어 찌꺼기는 작다. 대신 W2 연습 1.6처럼 양자화 오차가 평균되지 않아 왜곡이 $\Delta^2/12$ 아래로 내려가지 않는다.
+\end{itemize}
+\vspace{1em}
+\small\textcolor{ink!60}{다음: W5 조립 — 사다리 C단계 정리와 남은 열린 문제.}
+\end{document}

@@ -1,0 +1,149 @@
+# path	source	note
+derivations/final_paragraph/refs/01_Gao2025_FiniteBlocklengthIT.pdf	arxiv:2504.07743	
+derivations/final_paragraph/refs/02_Kostina-Verdu2012_FixedLengthLossyFBL.pdf	arxiv:1102.3944	
+derivations/final_paragraph/refs/03_Kostina-Verdu2013_LossyJSCC_FBL.pdf	arxiv:1209.1317	
+derivations/final_paragraph/refs/06_Bourtsoulatze2019_DeepJSCC.pdf	manual	
+derivations/final_paragraph/refs/07_Seon2025_DRL-SC.pdf	manual	
+derivations/final_paragraph/refs/08_Tishby-Pereira-Bialek1999_IB.pdf	arxiv:physics/0004057	
+derivations/final_paragraph/refs/09_Enttsel-Corlay2026_ModelAwareRD.pdf	arxiv:2602.12866	
+derivations/final_paragraph/refs/10_Harell2025_RD_CodingForMachines.pdf	arxiv:2305.17295	
+derivations/final_paragraph/refs/11_Shao-Zhang2020_CommCompTradeoff.pdf	arxiv:2006.02166	
+derivations/final_paragraph/refs/12_Li2020_Edgent.pdf	arxiv:1910.05316	
+derivations/final_paragraph/refs/13_Yan2021_OnlineModelSplitting.pdf	arxiv:2105.13618	
+derivations/final_paragraph/refs/14_Zheng2026_RoboECC.pdf	arxiv:2603.20711	
+derivations/translation_enttsel2026/src/orig.pdf	arxiv:2602.12866	
+derivations/translation_seon2026_comst/src/orig.pdf	manual	
+download/2504.07743.pdf	arxiv:2504.07743	
+download/Deep_Joint_Source-Channel_Coding_for_Wireless_Image_Transmission.pdf	manual	
+download/Deep_Reinforced_Feature_Compression_and_Channel_Equalization_for_Semantic_Communications.pdf	manual	
+download/Deep_Reinforced_Segment_Selection_and_Equalization_for_Task-Oriented_Semantic_Communication.pdf	manual	
+download/ib/Alemi2017_VIB.pdf	arxiv:1612.00410	
+download/ib/Shao2022_TaskOriented_IB.pdf	arxiv:2102.04170	
+download/ib/ShwartzZivTishby2017_BlackBox.pdf	arxiv:1703.00810	
+download/ib/TishbyZaslavsky2015_DL_IB.pdf	arxiv:1503.02406	
+download/sensors-26-02606-v2.pdf	manual	
+papers/classic/01_Slepian-Wolf1973.pdf	manual	doi:10.1109/tit.1973.1055037
+papers/classic/02_Wyner1975.pdf	manual	
+papers/classic/03_Ahlswede-Koerner1975.pdf	manual	doi:10.1109/tit.1975.1055469
+papers/classic/04_Wyner-Ziv1976.pdf	manual	doi:10.1109/tit.1976.1055508
+papers/classic/05_Koerner-Marton1979.pdf	manual	doi:10.1109/tit.1979.1056022
+papers/classic/07_Yamamoto1982.pdf	manual	doi:10.1109/tit.1982.1056560
+papers/classic/08_Han-Kobayashi1987.pdf	manual	doi:10.1109/tit.1987.1057272
+papers/classic/09_Gallager1988_LIDS-report.pdf	manual	doi:10.1109/18.2626
+papers/classic/10_Berger-Zhang-Viswanathan1996.pdf	manual	doi:10.1109/18.490552
+papers/classic/15_Max1960.pdf	manual	doi:10.1109/tit.1960.1057548
+papers/classic/16_Schuchman1964.pdf	manual	
+papers/classic/21_Ziv1985.pdf	manual	doi:10.1109/tit.1985.1057034
+papers/classic/22_Forney1988_CosetCodesI.pdf	manual	doi:10.1109/18.21245
+papers/classic/23_Zamir-Feder1992.pdf	manual	doi:10.1109/18.119699
+papers/classic/29_Tsitsiklis1986.pdf	manual	doi:10.1109/tac.1986.1104412
+papers/classic/S1_Wagner2011.pdf	manual	
+papers/classic/S2_Gray-Neuhoff1998.pdf	manual	doi:10.1109/18.720541
+papers/classic/S3_Oohama1998.pdf	manual	doi:10.1109/18.669162
+papers/classic/S4_PrabhakaranTseRamchandran2004.pdf	manual	doi:10.1109/ISIT.2004.1365154
+papers/classic/S5_ViswanathanBerger1997.pdf	manual	doi:10.1109/18.623151
+papers/classic/S6_Oohama2005.pdf	manual	doi:10.1109/TIT.2005.850110
+papers/classic/S7_AhlswedeHan1983.pdf	manual	doi:10.1109/TIT.1983.1056669
+papers/modern/Acharya_DME.pdf	arxiv:2010.06562	
+papers/modern/AjalloeianStich2020_BiasedSGD.pdf	arxiv:2008.00051	
+papers/modern/Alemi2017_VIB.pdf	arxiv:1612.00410	
+papers/modern/Appuswamy_netcomp.pdf	arxiv:0912.2820	
+papers/modern/Bottou2018_LargeScaleML.pdf	arxiv:1606.04838	
+papers/modern/Braverman2016_DME_LB.pdf	arxiv:1506.07216	
+papers/modern/Bubeck2015_ConvexOptimization.pdf	arxiv:1405.4980	
+papers/modern/CERAR2026_ring_allreduce.pdf	arxiv:2609.23898	
+papers/modern/Chen2004_CEOSumRate.pdf	https://www.ece.mcmaster.ca/~junchen/01321210.pdf	
+papers/modern/Chen2022_SecAgg_price.pdf	arxiv:2203.03761	
+papers/modern/Chen2023_SecAgg_freq.pdf	arxiv:2211.10041	
+papers/modern/DRIVE2021.pdf	arxiv:2105.08339	
+papers/modern/Davies2021_DME_lattice.pdf	arxiv:2002.09268	
+papers/modern/EDEN2022.pdf	arxiv:2108.08842	
+papers/modern/ElGamalKim2010_NIT_lecture_notes_v4.pdf	arxiv:1001.3404	
+papers/modern/Erez2004_LatticeAWGN.pdf	http://web.mit.edu/6.454/www/www_fall_2004/latticedecoding/erez_zamir_lat_dec.pdf	
+papers/modern/FradeliziGavalakisRapaport2024_discrete_entropy_Zd.pdf	arxiv:2401.15462	
+papers/modern/GGMT2023_Marton_F2n.pdf	arxiv:2311.05762	
+papers/modern/GGMT2024_Marton_boundedtorsion.pdf	arxiv:2404.02244	
+papers/modern/GavalakisKontoyiannis2026_EPI_compact_groups.pdf	arxiv:2608.22534	
+papers/modern/GradiVeQ.pdf	arxiv:1811.03617	
+papers/modern/GreenMannersTao2023_sumsets_entropy_revisited.pdf	arxiv:2306.13403	
+papers/modern/GuruswamiVelingker2015_sumset.pdf	https://eccc.weizmann.ac.il/report/2014/165/download/	
+papers/modern/HaghighatshoarAbbeTelatar2014_integerEPI.pdf	arxiv:1301.4185	
+papers/modern/HighEntropy_sums2026.pdf	arxiv:2609.21459	
+papers/modern/Jeon2013_OrthogonalGaussianNetworks.pdf	arxiv:1310.7112	
+papers/modern/JogAnantharam2014_EPI_2n.pdf	arxiv:1207.6355	
+papers/modern/Kairouz_DDG.pdf	arxiv:2102.06387	
+papers/modern/Karam2024_Marton_type_entropy.pdf	arxiv:2406.10872	
+papers/modern/Karimireddy2019_EF.pdf	arxiv:1901.09847	
+papers/modern/Kim2026_bitSGD_LB.pdf	arxiv:2606.00703	
+papers/modern/KontoyiannisMadiman_sumset.pdf	arxiv:1206.0489	
+papers/modern/Krithivasan2011_AbelianGroup.pdf	arxiv:0808.2659	
+papers/modern/KrithivasanPradhan2009_journal.pdf	arxiv:0707.3461	
+papers/modern/KrithivasanPradhan_lattice_DSC.pdf	http://web.eecs.umich.edu/~pradhanv/paper/aaecc07.pdf	
+papers/modern/Lattice_OTA_FL.pdf	arxiv:2407.11807	
+papers/modern/LosslessHomomorphic2024.pdf	arxiv:2402.07529	
+papers/modern/MadimanKontoyiannis2015_Ruzsa_divergence.pdf	arxiv:1508.04089	
+papers/modern/Madiman_prime_cyclic.pdf	arxiv:1710.00812	
+papers/modern/MayekarTyagi2020.pdf	arxiv:2001.09032	
+papers/modern/Mergen2006_TypeBased.pdf	http://acsp.ece.cornell.edu/papers/MergenTong06SP.pdf	
+papers/modern/NEURON2026_fabric.pdf	arxiv:2606.25759	
+papers/modern/NazerGastpar_CF.pdf	arxiv:0908.2119	
+papers/modern/Ordentlich2013_SIF.pdf	arxiv:1307.2105	
+papers/modern/QSGD.pdf	arxiv:1610.02132	
+papers/modern/Ribeiro2006_BandwidthConstrainedI.pdf	https://www.seas.upenn.edu/~aribeiro/preprints/2006_ribeiro_giannakis_a.pdf	
+papers/modern/SecAgg_capacity2026.pdf	arxiv:2606.07277	
+papers/modern/Shao2022_TaskOriented_IB.pdf	arxiv:2102.04170	
+papers/modern/ShwartzZivTishby2017_BlackBox.pdf	arxiv:1703.00810	
+papers/modern/SumComp2023.pdf	arxiv:2310.20504	
+papers/modern/Suresh2022_correlated_quant.pdf	arxiv:2203.04925	
+papers/modern/SwitchML.pdf	arxiv:1903.06701	
+papers/modern/SwitchML_NSDI21.pdf	https://www.usenix.org/system/files/nsdi21-sapio.pdf	
+papers/modern/THC2024.pdf	arxiv:2302.08545	
+papers/modern/THC_followup2024.pdf	arxiv:2407.01378	
+papers/modern/Tao_sumset_entropy.pdf	arxiv:0906.4387	
+papers/modern/TishbyZaslavsky2015_DL_IB.pdf	arxiv:1503.02406	
+papers/modern/TsujinoWatanabe2026_modsum.pdf	arxiv:2606.25570	
+papers/modern/UtilityGradComp2022.pdf	arxiv:2103.00543	
+papers/modern/UyematsuMatsuta2015_WAK_oneshot.pdf	manual	
+papers/modern/Wagner2008_TwoEncoder.pdf	arxiv:cs/0510095	
+papers/modern/WagnerAnantharam2005_infeasibility.pdf	arxiv:cs/0511103	
+papers/modern/WagnerAnantharam2008_outer.pdf	https://people.eecs.berkeley.edu/~ananth/2008+/WagnerMultiterminalSourceCoding_Final.pdf	
+papers/modern/WatanabeKuzuokaTan2015_WZ_secondorder.pdf	arxiv:1301.6467	
+papers/modern/Wolf2019_many_help_one.pdf	arxiv:1701.06416	
+papers/modern/WynerZiv_estimators.pdf	arxiv:2011.12160	
+papers/modern/Xie2023_JointCodingModDigitalOAC.pdf	arxiv:2311.06829	
+papers/modern/YangGroverKar_innetwork_RD.pdf	arxiv:1601.06224	
+papers/modern/Zamir2002_NestedBinning.pdf	http://www.eng.tau.ac.il/~zamir/papers/nested_zse.pdf	
+papers/modern/Zhang2023_CEO_model_aggregation.pdf	arxiv:2206.13984	
+papers/modern/ZhangDuchiJordanWainwright2013.pdf	arxiv:1405.0782	
+papers/modern/Zhou2022_symmetric_Gaussian_DSC.pdf	arxiv:2201.07784	
+papers/modern/ZhuGastpar_typical_sumsets.pdf	arxiv:1511.08435	
+papers/segment/ATSToDMA2026.pdf	arxiv:2607.03520	
+papers/segment/AdaptiveSemanticToken2025.pdf	arxiv:2505.17604	
+papers/segment/Bergner2023_IPS.pdf	arxiv:2210.13007	
+papers/segment/Cordonnier2021_DPS.pdf	arxiv:2104.03059	
+papers/segment/Devoto2024_SemanticTokenSelection.pdf	arxiv:2405.02330	
+papers/segment/DynaViT2026.pdf	manual	
+papers/segment/EnttselCorlay2026_ModelAwareRD.pdf	arxiv:2602.12866	
+papers/segment/Erak2025_TokenMerging.pdf	arxiv:2509.09168	
+papers/segment/Erak2026_TokenMerging_OJCOMS.pdf	arxiv:2509.09955	
+papers/segment/FeatureImportanceTxCtrl_ICTE2025.pdf	manual	
+papers/segment/Gan2025_SComCP.pdf	arxiv:2507.00895	
+papers/segment/HEARTViT2025.pdf	arxiv:2512.20120	
+papers/segment/IBQuantization2026.pdf	arxiv:2606.10869	
+papers/segment/IRCSC2025.pdf	arxiv:2504.20441	
+papers/segment/IoVHierarchicalSemantic_Sensors2026.pdf	manual	
+papers/segment/LookWhere2025.pdf	arxiv:2505.18051	
+papers/segment/MultitaskIB2026.pdf	arxiv:2610.30493	
+papers/segment/Qiao2025_TokCom_WCM.pdf	arxiv:2502.12096	
+papers/segment/QueueAwareTokCom2026.pdf	arxiv:2610.16730	
+papers/segment/RAPID2026.pdf	arxiv:2606.08156	
+papers/segment/Survey2025_DynamicNN.pdf	arxiv:2501.07451	
+papers/segment/Survey2025_LightweightViT.pdf	arxiv:2505.03113	
+papers/segment/Survey2026_SemanticToTokenCom.pdf	arxiv:2609.10714	
+papers/segment/TADIB2026_DistributedIB.pdf	arxiv:2510.04000	
+papers/segment/TONIC2026.pdf	arxiv:2605.21553	
+papers/segment/TiSemCom2026.pdf	arxiv:2611.12928	
+papers/segment/TokenMaskingDetection2026.pdf	arxiv:2605.02123	
+papers/segment/TokenOrientedViT2026.pdf	arxiv:2608.25410	
+papers/segment/Uzkent2020_PatchDrop.pdf	arxiv:2003.00425	
+papers/segment/Zhu2026_TOFS.pdf	arxiv:2611.09173	

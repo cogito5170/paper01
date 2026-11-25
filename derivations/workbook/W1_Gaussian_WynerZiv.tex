@@ -1,0 +1,215 @@
+% 작업장 W1 — 2차 가우시안 Wyner–Ziv (tectonic으로 컴파일: tectonic W1_Gaussian_WynerZiv.tex)
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setCJKmainfont{AppleMyungjo}
+\setCJKsansfont{Apple SD Gothic Neo}
+\setCJKmonofont{Apple SD Gothic Neo}
+\xeCJKsetup{CJKspace=true}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=24mm]{geometry}
+\usepackage{booktabs,tabularx,array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+\linespread{1.25}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+
+\definecolor{ink}{HTML}{1B2433}
+\definecolor{acc}{HTML}{2C55C9}
+\definecolor{hot}{HTML}{B8650A}
+\newtcolorbox{thmbox}{colback=acc!4,colframe=acc!60,boxrule=0.5pt,arc=1pt,left=6pt,right=6pt}
+\newtcolorbox{bridge}{colback=hot!5,colframe=hot!70,boxrule=0.5pt,arc=1pt,left=6pt,right=6pt}
+
+\newcommand{\blank}{\rule[-0.3em]{0pt}{1.6em}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\steptable}[1]{%
+  \renewcommand{\arraystretch}{1.55}%
+  \begin{tabularx}{\linewidth}{@{}p{1.1cm}>{\raggedright\arraybackslash}p{7.2cm}Y@{}}
+  \toprule
+  단계 & 주장 & 근거 (직접 채울 것)\\ \midrule
+  #1
+  \bottomrule
+  \end{tabularx}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\E}{\mathbb{E}}
+
+\title{\sffamily 작업장 W1\\[2pt]\large 2차 가우시안 Wyner–Ziv: 달성과 역을 손으로}
+\author{}
+\date{2026-11-22}
+
+\begin{document}
+\maketitle
+\vspace{-2.5em}
+
+\begin{center}\small
+교재: \texttt{derivations/textbook/EGK\_L12\_side\_information.md} 2절(보조정리), 3.4절(Wyner–Ziv)\\
+원문: El Gamal–Kim, \emph{Lecture Notes on Network Information Theory} v4, Lecture 12 (PDF 300–306쪽)
+\end{center}
+
+\textbf{사용법.} 각 표의 오른쪽 칸에 근거를 직접 쓴다. 힌트는 부록 A, 답은 부록 B에 있다. 막힐 때만 넘긴다. 목표 시간은 1부 40분, 2부 40분, 3부 30분이다.
+
+\section*{0. 문제}
+
+\textbf{설정.} $X\sim\mathcal N(0,P)$, $Y=X+N$, $N\sim\mathcal N(0,\mathcal N_0)$는 $X$와 독립. $(X_i,Y_i)$, $i=1,\dots,n$은 i.i.d.
+
+\textbf{부호.} 부호기 $m:\mathbb R^n\to\{1,\dots,2^{nR}\}$는 $X^n$만 본다. 복호기 $\hat x^n(m,Y^n)$은 메시지와 부가 정보 $Y^n$을 본다. 왜곡은 $D(\text{부호})=\frac1n\sum_{i=1}^n\E(X_i-\hat X_i)^2$.
+
+\begin{thmbox}
+\textbf{정리 W1.} $\sigma^2:=\Var(X\mid Y)$라 하자. 그러면
+\[
+R_{\mathrm{WZ}}(D)=\tfrac12\log^+\frac{\sigma^2}{D}.
+\]
+즉 (i) 모든 $R>\frac12\log(\sigma^2/D)$에서 왜곡 $D+\varepsilon$을 내는 부호가 있고(\textbf{달성}), (ii) 왜곡 $D$ 이하를 내는 모든 부호는 $R\ge\frac12\log(\sigma^2/D)$를 만족한다(\textbf{역}).
+\end{thmbox}
+
+\textbf{연습 0.1} $\sigma^2$를 $P,\mathcal N_0$로 써라. \hfill\blank
+
+\textbf{연습 0.2} $P=\mathcal N_0=1$, $D=0.1$일 때 정리 W1의 율을 비트로 계산하라. \hfill\blank
+
+\section*{1부. 달성: 시험 채널을 고르고 정보량을 계산한다}
+
+일반 Wyner–Ziv 정리(교재 3.4절, 원문 슬라이드 12–16)를 \textbf{그대로 쓴다}:
+\begin{gather*}
+R_{\mathrm{WZ}}(D)=\min I(X;U\mid Y),\quad\text{최소는 } p(u\mid x),\ \hat x(u,y)\text{ 중 } \E(X-\hat x(U,Y))^2\le D\text{인 것},\\
+I(X;U\mid Y)=I(X;U)-I(Y;U)\quad(U-X-Y\text{가 마르코프 사슬이므로}).
+\end{gather*}
+연속 소스로의 확장은 교재 2.7절이다(그 노트에서 세부는 미확인). 여기서는 확장을 받아들인다. 따라서 달성은 \textbf{좋은 $U$ 하나를 고르고 $I(X;U\mid Y)$를 계산}하면 끝난다.
+
+\textbf{선택.} $U=X+V$, $V\sim\mathcal N(0,Q)$는 $(X,N)$과 독립. 복원 $\hat x(U,Y)=\E[X\mid U,Y]$.
+
+\steptable{
+1.1 & $U-X-Y$는 마르코프 사슬이다 & \\
+1.2 & $\E\big(X-\E[X\mid U,Y]\big)^2=\big(\tfrac1P+\tfrac1{\mathcal N_0}+\tfrac1Q\big)^{-1}=\big(\tfrac1{\sigma^2}+\tfrac1Q\big)^{-1}$ & \\
+1.3 & 왜곡을 정확히 $D$로 맞추는 $Q$: $\tfrac1Q=\tfrac1D-\tfrac1{\sigma^2}$ \ ($D<\sigma^2$) & \\
+1.4 & $I(X;U\mid Y)=h(U\mid Y)-h(U\mid X,Y)$ & \\
+1.5 & $h(U\mid X,Y)=h(V)=\tfrac12\log(2\pi e Q)$ & \\
+1.6 & $h(U\mid Y)=\tfrac12\log\big(2\pi e(\sigma^2+Q)\big)$ & \\
+1.7 & $I(X;U\mid Y)=\tfrac12\log\tfrac{\sigma^2+Q}{Q}=\tfrac12\log\tfrac{\sigma^2}{D}$ & (대수)\\
+1.8 & $D\ge\sigma^2$이면 율 $0$으로 충분하다 & \\
+}
+
+\textbf{연습 1.9 (부호가 실제로 하는 일).} 달성 부호는 덮개(covering) 율 $\tilde R>I(X;U)$로 양자화하고, 비닝으로 $R>I(X;U)-I(Y;U)$만 보낸다. $P=\mathcal N_0=1$, $D=0.1$에서 $Q$, $I(X;U)$, $I(Y;U)$를 계산하고 차이가 연습 0.2의 값과 같은지 확인하라.
+
+\vspace{4.5em}
+
+\textbf{연습 1.10.} 같은 율을 부호기도 $Y$를 아는 경우(조건부 율-왜곡 $R_{X\mid Y}(D)$)와 비교하라. 왜 같아도 이상하지 않은가?
+
+\vspace{3.5em}
+
+\section*{2부. 역: 어떤 부호도 $\tfrac12\log(\sigma^2/D)$보다 적게 쓸 수 없다}
+
+\textbf{보조 변수 없이 끝나는 직접 증명이다.} 이 연구의 역정리 1–3단계와 같은 모양이다. 임의의 부호가 $D(\text{부호})\le D$를 만족한다고 하자. $M=m(X^n)$, $\hat X_i=\hat x_i(M,Y^n)$, $D_i=\E(X_i-\hat X_i)^2$.
+
+\steptable{
+(a) & $nR\ge H(M)$ & \\
+(b) & $H(M)\ge H(M\mid Y^n)$ & \\
+(c) & $H(M\mid Y^n)\ge I(X^n;M\mid Y^n)$ \quad\textcolor{hot}{$\leftarrow$ 2.4에서 다시 본다} & \\
+(d) & $I(X^n;M\mid Y^n)=h(X^n\mid Y^n)-h(X^n\mid M,Y^n)$ & \\
+(e) & $h(X^n\mid Y^n)=\tfrac n2\log(2\pi e\sigma^2)$ & \\
+(f) & $h(X^n\mid M,Y^n)\le\sum_i h(X_i\mid M,Y^n)$ & \\
+(g) & $h(X_i\mid M,Y^n)=h(X_i-\hat X_i\mid M,Y^n)$ & \\
+(h) & $h(X_i-\hat X_i\mid M,Y^n)\le h(X_i-\hat X_i)$ & \\
+(i) & $h(X_i-\hat X_i)\le\tfrac12\log(2\pi e D_i)$ & \\
+(j) & $\sum_i\tfrac12\log(2\pi e D_i)\le\tfrac n2\log(2\pi e D)$ & \\
+(k) & 위를 모으면 $R\ge\tfrac12\log(\sigma^2/D)$ & (대수)\\
+}
+
+\textbf{연습 2.1} (c)에서 버린 항 $H(M\mid X^n,Y^n)$은 이 문제에서 정확히 얼마인가? \hfill\blank
+
+\textbf{연습 2.2} 이 증명이 일반 Wyner–Ziv가 아니라 가우시안 경우만 증명하는 것은 어느 단계 때문인가? \hfill\blank
+
+\textbf{연습 2.3} 1부와 2부의 결과가 일치함을 확인하고, “부호기가 $Y$를 몰라도 손해가 없다”는 말을 두 증명으로 정당화하라.
+
+\vspace{3.5em}
+
+\begin{bridge}
+\textbf{2.4 이 연구로 넘어가는 다리 (꼭 해 볼 것).} 군 합 CEO에서는 복호기가 $M$ 대신 군 합 $Z=Q_1\oplus\cdots\oplus Q_K$를 본다. 2부와 같은 사슬을 $Z$로 쓰면
+\[
+\log|G|\ \ge\ H(Z\mid W)\ =\ I(X;Z\mid W)\ +\ H(Z\mid X,W).
+\]
+2부의 (c)는 둘째 항을 버리는 단계와 같다.
+
+\textbf{연습 2.4} Wyner–Ziv에서 그 항은 0이었다(연습 2.1). 군 합에서는 왜 0이 아닌가? $Z$가 $X$의 함수가 되지 못하는 이유를 한 문장으로 쓰라.
+\vspace{3em}
+\end{bridge}
+
+\section*{3부 (선택). 일반 Wyner–Ziv 역: 보조 변수를 만드는 법}
+
+가우시안이 아닐 때 쓰는 증명이다. 교재 3.4절 ‘역 증명’을 옆에 두고 채운다. 핵심은 $U_i:=(M,Y^{i-1},Y_{i+1}^n)$로 두는 것이다.
+
+\steptable{
+3.1 & $nR\ge H(M)\ge H(M\mid Y^n)\ge I(X^n;M\mid Y^n)$ & 2부 (a)–(c)\\
+3.2 & $I(X^n;M\mid Y^n)=\sum_i I(X_i;M\mid Y^n,X^{i-1})$ & \\
+3.3 & $=\sum_i\big[h(X_i\mid Y^n,X^{i-1})-h(X_i\mid M,Y^n,X^{i-1})\big]\ge\sum_i\big[h(X_i\mid Y_i)-h(X_i\mid M,Y^n)\big]$ & (두 가지 사실)\\
+3.4 & $=\sum_i I(X_i;U_i\mid Y_i)$ & \\
+3.5 & $U_i-X_i-Y_i$는 마르코프 사슬이다 & \\
+3.6 & $\hat X_i$는 $(U_i,Y_i)$의 함수다 & \\
+3.7 & 시분할 변수 $T\sim\mathrm{Unif}\{1..n\}$로 $R\ge I(X;U\mid Y)$, $U=(U_T,T)$ & \\
+}
+
+\section*{4. 스스로 점검}
+\begin{itemize}[label=$\square$]
+\item 1부를 표 없이 백지에 다시 쓸 수 있다.
+\item 2부 (a)–(k) 각 단계의 근거를 한 줄씩 말할 수 있다.
+\item 2부 (c)가 무엇을 버리는지, 군 합에서 왜 그것을 버릴 수 없는지 설명할 수 있다.
+\item (선택) 3부의 $U_i$를 왜 그렇게 정했는지 설명할 수 있다.
+\end{itemize}
+
+\newpage
+\section*{부록 A. 힌트}
+
+\textbf{1부}
+\begin{itemize}[leftmargin=2.2em]
+\item[1.1] $V$는 $(X,N)$과 독립이다. $U$는 $(X,V)$의 함수, $Y$는 $(X,N)$의 함수.
+\item[1.2] 가우시안 사후 분포. 사전 정밀도(분산의 역수) $1/P$에, $X$가 주어지면 서로 독립인 관측 $Y=X+N$, $U=X+V$의 정밀도 $1/\mathcal N_0$, $1/Q$가 더해진다. $1/P+1/\mathcal N_0=1/\sigma^2$도 확인하라.
+\item[1.3] 1.2의 식을 $D$와 같게 놓고 푼다.
+\item[1.4] 조건부 상호 정보를 $U$ 쪽 미분 엔트로피로 전개.
+\item[1.5] $(X,Y)$가 주어지면 $U-X=V$. 평행 이동은 미분 엔트로피를 바꾸지 않고, $V\perp(X,Y)$.
+\item[1.6] $(U,Y)$는 결합 가우시안이고 $\Var(U\mid Y)=\Var(X\mid Y)+Q$.
+\item[1.7] $1/D=1/\sigma^2+1/Q$를 쓰면 $(\sigma^2+Q)/Q=\sigma^2(1/\sigma^2+1/Q)=\sigma^2/D$.
+\item[1.8] $\hat X=\E[X\mid Y]$만으로 왜곡 $\sigma^2$.
+\end{itemize}
+
+\textbf{2부}
+\begin{itemize}[leftmargin=2.2em]
+\item[(a)] 이산 확률변수의 엔트로피는 값 개수의 로그 이하.
+\item[(b)] 조건을 걸면 엔트로피는 줄거나 같다.
+\item[(c)] $I(X^n;M\mid Y^n)=H(M\mid Y^n)-H(M\mid X^n,Y^n)$, 이산 $M$이면 $H(M\mid X^n,Y^n)\ge0$.
+\item[(d)] 상호 정보를 연속 변수 쪽에서 쓴 것.
+\item[(e)] $(X_i,Y_i)$ i.i.d.라 연쇄 법칙이 합으로 갈라지고, 가우시안 $X\mid Y$의 미분 엔트로피.
+\item[(f)] 연쇄 법칙 + 조건 $X^{i-1}$을 버리면 엔트로피는 커지거나 같다.
+\item[(g)] $\hat X_i$는 $(M,Y^n)$의 함수. 조건이 주어지면 상수 이동.
+\item[(h)] 조건을 버리면 엔트로피는 커지거나 같다.
+\item[(i)] 2차 모멘트가 정해진 실수 확률변수 중 미분 엔트로피 최대는 가우시안. 분산 $\le$ 2차 모멘트.
+\item[(j)] $\log$의 오목성(옌센): $\frac1n\sum\log D_i\le\log\big(\frac1n\sum D_i\big)\le\log D$.
+\end{itemize}
+
+\textbf{2.4} $X,W$를 조건으로 두어도 $Q_k=f_k(X+N_k,W)$에는 작업자 잡음 $N_k$가 남는다. $Z$는 서로 독립인 흔들림 $K$개를 더한 것이다. 이 항의 하한 $\tfrac12\log_2K-c$가 이 연구의 보조정리 L이다(SPEC P.6).
+
+\textbf{3부}
+\begin{itemize}[leftmargin=2.2em]
+\item[3.2] 연쇄 법칙.
+\item[3.3] $X_i$는 $Y_i$가 주어지면 $(Y^{i-1},Y_{i+1}^n,X^{i-1})$과 독립(i.i.d.)이라 첫 항이 $h(X_i\mid Y_i)$. 둘째 항은 조건 $X^{i-1}$을 버려 커진다.
+\item[3.5] $M$은 $X^n$의 함수. $(M,Y^{i-1},Y_{i+1}^n)$은 $(X^n,Y^{i-1},Y_{i+1}^n)$의 함수이고, 이것은 $X_i$가 주어지면 $Y_i$와 독립.
+\item[3.6] $\hat X_i=\hat x_i(M,Y^n)$, $Y^n=(Y^{i-1},Y_i,Y_{i+1}^n)$.
+\item[3.7] $\frac1n\sum_i I(X_i;U_i\mid Y_i)=I(X_T;U_T\mid Y_T,T)=I(X_T;U_T,T\mid Y_T)$ ($T$는 $(X_T,Y_T)$와 독립). 왜곡도 $T$로 평균.
+\end{itemize}
+
+\section*{부록 B. 답}
+\begin{itemize}[leftmargin=2.2em]
+\item[0.1] $\sigma^2=P-\frac{P^2}{P+\mathcal N_0}=\frac{P\mathcal N_0}{P+\mathcal N_0}$. 가우시안에서는 조건부 분산이 $Y$의 값에 무관하다.
+\item[0.2] $\sigma^2=0.5$, $R=\frac12\log_2 5\approx1.161$ 비트.
+\item[1.9] $Q=1/(10-2)=0.125$. $I(X;U)=\frac12\log_2\frac{P+Q}{Q}=\frac12\log_2 9\approx1.585$. $I(Y;U)=\frac12\log_2\frac{\Var U}{\Var(U\mid Y)}=\frac12\log_2\frac{1.125}{0.625}=\frac12\log_2 1.8\approx0.424$. 차이 $\approx1.161$. 덮개에 1.585비트가 들지만 서버가 $Y^n$으로 빈 안의 후보를 가려내므로 0.424비트를 아낀다.
+\item[1.10] $R_{X\mid Y}(D)=\frac12\log(\sigma^2/D)$는 $X-\E[X\mid Y]$를 부호화하는 점대점 문제다. 2부의 역은 부호기가 $Y^n$을 보는 경우에도 그대로 성립하므로(어디서도 $M=m(X^n)$만 썼다는 사실을 쓰지 않는다. 확인해 보라) 두 값은 같아야 한다.
+\item[2부] $nR\ge I(X^n;M\mid Y^n)=\frac n2\log(2\pi e\sigma^2)-h(X^n\mid M,Y^n)\ge\frac n2\log(2\pi e\sigma^2)-\frac n2\log(2\pi eD)=\frac n2\log\frac{\sigma^2}{D}$. $D\ge\sigma^2$이면 우변이 음수라 $\log^+$.
+\item[2.1] $0$. $M=m(X^n)$은 $X^n$의 결정적 함수다. 부호기가 공유 난수 $W$를 쓰면 $W$를 조건에 넣어 $0$.
+\item[2.2] (e)와 (i). $X\mid Y$가 가우시안이라는 것과 가우시안 최대 엔트로피를 썼다. 일반 소스는 3부처럼 보조 변수가 필요하다.
+\item[2.4] 예시 답: “$X$와 $W$를 알아도 각 $Q_k$에는 서로 독립인 작업자 잡음 $N_k$의 흔적이 남고, 군 합은 그 $K$개의 흔들림을 지우지 못하고 더하기 때문이다.”
+\end{itemize}
+
+\vspace{1em}
+\small\textcolor{ink!60}{수치는 Python으로 검산함. 다음 작업장: W2. 군 합 CEO의 스칼라 단발 달성 (디더 균일 양자화 + mod $M$, 감김 확률 상한, 1차원 손실 $\tfrac12\log_2(2\pi e/12)\approx0.254$비트).}
+\end{document}

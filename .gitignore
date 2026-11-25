@@ -1,2 +1,9 @@
-# 공개 저장소: 논문 PDF는 올리지 않는다 (서지·DOI는 papers/README.md)
+# 공개 저장소: 논문 PDF·원문은 올리지 않는다.
+# 다른 컴퓨터에서는 `bash scripts/fetch_papers.sh`로 papers/MANIFEST.tsv에 적힌 논문을 다시 받는다.
 papers/**/*.pdf
+download/
+derivations/final_paragraph/refs/*.pdf
+derivations/translation/source.txt
+# 제3자 게시물 캡처
+OCR/
+.DS_Store

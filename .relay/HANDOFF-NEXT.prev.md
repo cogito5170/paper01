@@ -1,20 +1,23 @@
 STATUS: CONTINUE
-META: 2026-11-19 17:57 · main@8c1df16 · uncommitted 7 files
+META: 2026-11-24 20:01 · main@5a2ca0a · uncommitted 15 files
 ## Done
-- 잠정 결정 ①~④(스칼라 단발, 단일 라운드, 상행·하행 율 분리, 기호 K)와 제안서 §4.2 추가안을 사용자에게 쉬운 말로 설명함.
-- 사용자 질문에 답함: 스위치는 압축하지 않고 더하기만 한다. 칸 폭이 곧 하행 통신량이다. ①은 압축 단위, ③은 비트를 세는 위치라서 서로 다른 결정이다.
-- 문헌 주제 조사를 시작함. papers/README.md와 파일 목록(71편)만 확인한 상태에서 중단됨.
+- 경로 2(시스템·알고리즘 논문) 선택. 오류율 기반 통신 기술 10종 서베이 + #4 데이터센터 FEC, #8 QKD 정보 조정 심층 → papers/TO_DOWNLOAD.md 우선순위 D.
+- IB 논문 4편 확보(papers/modern/, README 갱신). Tishby 2015 번역본.
+- 전역 스킬 ko-paper-translate 제작(/slash 가능, 용어집 2개, crop_fig.sh, check_translation.py, eval 3건: skill 100% vs 기준 77.8%).
+- 김진영 교수(광운대) 최근 논문 조사. Seon 외 레터(LCOMM 2024, 9쪽)·저널(TCCN 2025, 27쪽) 전문 번역, 검사기 경고 0.
+- main pull(5a2ca0a): idea/ IB 패치 선택 초록 v2·v3, 질문방 기록 4개 추가.
 ## Decisions
-- 커밋은 SPEC·proposal 개정 뒤에 한 번에 한다 (사용자 선택).
-- ①~④ 확정과 §4.2 추가는 아직 답을 받지 못함. 사용자가 설명부터 요구했다.
+- 비CC 번역본은 .gitignore로 커밋 차단. 이유: 공개 저장소.
+- 용어 통일: 행위자/비평자, 리턴, 하이퍼파라미터. 이유: 두 논문 일관성.
 ## Next
-1. 사용자 요청 재개: papers/classic, papers/modern 논문이 각각 무엇을 다루는지 조사한다. 관점은 (1) 통신량 (2) 통신 비트 수 (3) 정보이론적 개념 등이고, 자세히 정리한다. 분량이 크므로 scout(sonnet) 여러 개에 묶음별로 맡기고, 결과는 표로 만든다(논문 · 주제 · 무엇을 세는가 · 핵심 개념 · 본 연구와의 관계).
-2. ①~④ 확정 여부와 §4.2 추가 여부를 다시 묻는다.
-3. 확정되면 SPEC과 proposal을 개정하고 커밋한다.
-4. 보조정리 L의 5b 증명, 율-K 시뮬레이션, 신규성 2차 점검 (이전 Next 3~5).
+1. idea/abstract_v3_IB_patch_selection.md 검토(새로 들어온 연구 방향).
+2. 선택: 두 Seon 논문 원천 부호화 부분을 문제 P·IB와 비교 정리.
+3. 스킬 개선 대기: 벡터 그림 자르기, 최종 보고 대화체. eval viewer(포트 3117) 피드백 미수령.
+4. 미응답 제안: 합 호환 디더 양자화 시뮬레이션, TCCN/LCOMM/JSAC 2025 논문 TO_DOWNLOAD 추가.
+5. 이전 Next(후보 B 결정, O1·O2, C₀ 대조) 여전히 대기. 커밋 여부 사용자 확인.
 ## Files
-- papers/README.md:1-110
-- draft.md:1-139
-- proposal.md:47-60
-- SPEC.md:59-80
-- interview.md:739-760
+- papers/TO_DOWNLOAD.md:1-400
+- derivations/translation_seon2024_lcomm/ko.tex:1-400
+- derivations/translation_seon2025_tccn/ko.tex:1-38
+- idea/abstract_v3_IB_patch_selection.md:1-93
+- SPEC.md:1-120
